@@ -15,7 +15,6 @@ namespace kudapoyti.Service.Interfaces
     {
         public Task<IEnumerable<AdminViewModel>> GetAllAysnc(PaginationParams @params); 
         public Task<AdminViewModel> GetAysnc(long id);
-        public Task<bool> RegisterAsync(AdminCreateDto account);
         public Task<bool> UpdateAysnc(long id,UpdateCreateDto dto);    
         public Task<bool> DeleteAysnc(long id);
     }

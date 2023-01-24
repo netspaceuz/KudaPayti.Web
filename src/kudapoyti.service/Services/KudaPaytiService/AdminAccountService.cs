@@ -21,13 +21,11 @@ namespace kudapoyti.Service.Services.KudaPaytiService
     {
         private readonly IUnitOfWork _work;
         private readonly IAuthManager _auth;
-        private readonly IImageService _image;
 
-        public AdminAccountService(IUnitOfWork repository, IAuthManager authManager, IImageService image)
+        public AdminAccountService(IUnitOfWork repository, IAuthManager authManager)
         {
             _work = repository;
             _auth = authManager;
-            _image = image;
             
         }
 

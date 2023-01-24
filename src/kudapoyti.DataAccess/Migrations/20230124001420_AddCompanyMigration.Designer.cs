@@ -12,20 +12,20 @@ using kudapoyti.DataAccess.DbConstexts;
 namespace kudapoyti.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230107183315_nimadraa")]
-    partial class nimadraa
+    [Migration("20230124001420_AddCompanyMigration")]
+    partial class AddCompanyMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("kudapoyti.Domain.Entities.Admins.Admin", b =>
+            modelBuilder.Entity("kudapoyti.Domain.Entities.Admins.Admin1", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,9 +44,6 @@ namespace kudapoyti.DataAccess.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<bool>("IsHead")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -70,6 +67,20 @@ namespace kudapoyti.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Description = " ",
+                            Email = "Kudapayti@gmail.com",
+                            FullName = "Kudapayti",
+                            PasswordHash = "$2a$11$pUC4LQVORynSuk0xn/Wl9ujn3e8NVGIa9rs8WUliW4USW5FY/BhOG",
+                            PhoneNumber = "+998999909090",
+                            Role = 0,
+                            Salt = "f1fd3ecc-32c8-430d-ae6d-288eb2753c43",
+                            TelegramLink = "https://t.me/Shoxrux_Husenov"
+                        });
                 });
 
             modelBuilder.Entity("kudapoyti.Domain.Entities.Comment.Comment", b =>
@@ -140,6 +151,9 @@ namespace kudapoyti.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("Location_link")

@@ -12,8 +12,8 @@ using kudapoyti.DataAccess.DbConstexts;
 namespace kudapoyti.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230108160429_dhkdn")]
-    partial class dhkdn
+    [Migration("20230124002217_AddCompany")]
+    partial class AddCompany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace kudapoyti.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("kudapoyti.Domain.Entities.Admins.Admin", b =>
+            modelBuilder.Entity("kudapoyti.Domain.Entities.Admins.Admin1", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,6 +151,9 @@ namespace kudapoyti.DataAccess.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
                     b.Property<string>("Location_link")

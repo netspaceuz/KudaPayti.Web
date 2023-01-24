@@ -5,7 +5,7 @@
 namespace kudapoyti.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class dfghbjnkl : Migration
+    public partial class AddCompany : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

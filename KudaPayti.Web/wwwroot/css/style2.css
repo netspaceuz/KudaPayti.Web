@@ -1,3 +1,21 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://media.istockphoto.com/id/1176446044/photo/tourist-couple-enjoying-their-summer-vacation.jpg?s=612x612&w=0&k=20&c=3grsfsTHDxJM7frpr0QbKb9g-FkoZLyXiCAdgBK4548=');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: .7rem;
+}
+
+.wrppr{
+    padding: 10px 50px 20px;
+    border-radius: 50px;
+    background-color: rgba(240, 255, 255, .5);
+}
+
+
 .gradient-custom-3 {
     /* fallback for old browsers */
     background: #84fab0;

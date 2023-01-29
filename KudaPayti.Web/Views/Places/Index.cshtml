@@ -1,24 +1,25 @@
 ﻿@using kudapoyti.Service.ViewModels
 @model List<PlaceBaseViewModel>
+
 <div class="container-fluid py-200">
-    <div class="container pt-5 pb-5">
-        <div class="text-center mb-3 pb-3">
+    <div class="container pt-10 pb-10">
+        <div class="text-center mb-7 pb-5">
             <h2 class="text-primary text-uppercase" style="letter-spacing: 5px;">Recommended</h2>
         </div>
     @{
         foreach(var place in Model)
         {
-             <div class="row">
-                 <div class="col-lg-4 col-md-6 mb-4">
-                      <div class="destination-item position-relative overflow-hidden mb-2">
-                            <img class="img-fluid" src="img/KonsertAshxabad.png" alt="">
-                          <a class="destination-overlay text-white text-decoration-none" href="">
-                             <h2 class="text-white">@place.Region</h2>
-                             <span>@place.Title</span>
-                          </a>
+                 <div class="row">
+                        <div class="col-lg-6 col-md-4 mb-8">
+                        <div class="destination-item position-relative overflow-hidden mb-2 border-radius: 50px">
+                                <img class="img-fluid" src="@place.ImageUrl" alt="">
+                              <a class="destination-overlay text-white text-decoration-none" href="">
+                                 <h3 class="text-white">@place.Title</h3>
+                                 <span>Region:@place.Region</span>
+                              </a>
+                         </div>
                      </div>
                  </div>
-             </div>
         }
     }
     </div>

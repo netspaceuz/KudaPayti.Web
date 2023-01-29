@@ -12,8 +12,8 @@ using kudapoyti.DataAccess.DbConstexts;
 namespace kudapoyti.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230124002217_AddCompany")]
-    partial class AddCompany
+    [Migration("20230129114122_updates")]
+    partial class updates
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

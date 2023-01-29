@@ -16,7 +16,7 @@ public class AdminRegisterDto
     [StringLength(40, MinimumLength = 5, ErrorMessage = "The Title should be minimum 5 and maximum 50 characters.")]
     public string FullName { get; set; } = string.Empty;
 
-    [Required, StrongEmail]
+    [Required, EmailAddress]
     public string Email { get; set; } = string.Empty;
 
     [Required]

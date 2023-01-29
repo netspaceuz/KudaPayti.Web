@@ -10,9 +10,11 @@ namespace kudapoyti.Service.Dtos.Accounts;
 
 public class AdminAccountLoginDto
 {
-    [Required, StrongEmailAttribute]
+    [Required(ErrorMessage ="Cerate Email")]
+    [EmailAddress(ErrorMessage ="Worning Email")]
     public string Email { get; set; } = string.Empty;
 
-    [Required, StrongPasswordAttribute]
+    [Required(ErrorMessage ="Create Password!!!")]
+    [StrongPasswordAttribute]
     public string Password { get; set; } = string.Empty;
 }

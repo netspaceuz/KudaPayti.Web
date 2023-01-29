@@ -1,7 +1,10 @@
-﻿using kudapoyti.DataAccess.Interfaces;
+﻿using AutoMapper;
+using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.DataAccess.Repositories;
 using kudapoyti.Service.Common.Security;
 using kudapoyti.Service.Interfaces;
+using kudapoyti.Service.Interfaces.Common;
+using kudapoyti.Service.Services.Common;
 using kudapoyti.Service.Services.KudaPaytiService;
 
 namespace KudaPayti.Web.Configurations.LayerConfigurations
@@ -10,10 +13,14 @@ namespace KudaPayti.Web.Configurations.LayerConfigurations
     {
         public static void AddService(this IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAdminRegistrService, AdminRegistrService>();
             services.AddScoped<IAuthManager, AUthManager>();
             services.AddScoped<IAdminAccountService, AdminAccountService>();
+            services.AddTransient<IPlaceService, PlaceService>();
+            services.AddScoped<IPaginationService, PaginatonService>();
+            services.AddScoped<IImageService, ImageService>();
         }
 
      

@@ -32,14 +32,14 @@ namespace kudapoyti.Service.Services.KudaPaytiService
         public async Task<string> LoginAsync(AdminAccountLoginDto loginDto)
         {
             var admin=await _work.Admins.FirstOrDefaoultAsync(x => x.Email==loginDto.Email);
-            if (admin is null) throw new StatusCodeException(HttpStatusCode.NotFound, "Admin not found, Email is incorrect!");
+            if (admin is null) throw new ModelErrorException(nameof(loginDto.Email), "Admin not found, Email is incorrect!");
 
             var hasherResult = PasswordHasher.Verify(loginDto.Password, admin.Salt, admin.PasswordHash);
             if (hasherResult)
             {
                 return _auth.GenerateToken(admin);
             }
-            else throw new StatusCodeException(HttpStatusCode.BadRequest, "Password is wrong!");
+            else throw new ModelErrorException(nameof(loginDto.Password),"Password is wrong!");
 
         }
 

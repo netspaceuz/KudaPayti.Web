@@ -30,9 +30,14 @@ namespace kudapoyti.Service.Services.KudaPaytiService
         {
             var emailcheck = await _work.Admins.FirstOrDefaoultAsync(x => x.Email == registerDto.Email);
             if (emailcheck is not null)
-                throw new StatusCodeException(HttpStatusCode.Conflict, "Email alredy exist");
+                throw new Exception();
+
+            var phone = await _work.Admins.FirstOrDefaoultAsync(x => x.PhoneNumber == registerDto.PhoneNumber);
+            if (phone is not null) throw new Exception();
+
             var hasherResult = PasswordHasher.Hash(registerDto.Password);
             var admin = (Admin1)registerDto;
+
             admin.PasswordHash = hasherResult.passwordHash;
             admin.Salt = hasherResult.salt;
             _work.Admins.CreateAsync(admin);

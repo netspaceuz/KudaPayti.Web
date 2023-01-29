@@ -12,7 +12,7 @@ namespace kudapoyti.Service.Interfaces
 {
     public interface IPlaceService
     {
-        public Task<IEnumerable<PlaceViewModel>> GetAllAsync(PaginationParams @paginationParams);
+        public Task<IEnumerable<PlaceBaseViewModel>> GetAllAsync(PaginationParams @Params);
         public Task<bool> UpdateAsync(long id, PlaceUpdateDto updateDto);
         public Task<PlaceViewModel> GetAsync(long id);
         public Task<IEnumerable<PlaceViewModel>> GetByKeyword(string keyword);

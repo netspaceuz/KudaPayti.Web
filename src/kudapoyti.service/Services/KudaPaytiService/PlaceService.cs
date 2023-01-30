@@ -22,6 +22,7 @@ using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.OpenApi.Writers;
+using kudapoyti.Domain.Entities.Comment;
 
 namespace kudapoyti.Service.Services.kudapoytiService;
 
@@ -69,11 +70,21 @@ public class PlaceService : IPlaceService
         var place = await _repository.Places.FindByIdAsync(id);
         if (place is not null)
         {
-            var res = (PlaceViewModel)place;
-            return res;
+            return new PlaceViewModel()
+            {
+                Id = place.Id,
+                ImageUrl = place.ImageUrl,
+                Title = place.Title,
+                Description = place.Description,
+                rank = place.rank,
+                Location_link = place.Location_link,
+                PlaceSiteUrl = place.PlaceSiteUrl,
+                Region = place.Region
+            };
         }
         else throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found");
     }
+
     public async Task<IEnumerable<PlaceViewModel>> GetByKeyword(string keyword)
     {
         IEnumerable<PlaceViewModel> places = await _repository.Places

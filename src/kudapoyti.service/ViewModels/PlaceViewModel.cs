@@ -24,16 +24,17 @@ namespace kudapoyti.Service.ViewModels
         public string PlaceSiteUrl { get; set; } = String.Empty;
 
         public string Region { get; set; } = String.Empty;
+
         public static implicit operator PlaceViewModel(Place comment)
         {
             return new()
             {
-                Id=comment.Id,
-                ImageUrl=comment.ImageUrl,
-                Title=comment.Title,
-                Description=comment.Description,
-                rank=comment.rank,
-                Location_link=comment.Location_link,
+                Id = comment.Id,
+                ImageUrl = comment.ImageUrl,
+                Title = comment.Title,
+                Description = comment.Description,
+                rank = comment.rank,
+                Location_link = comment.Location_link,
                 PlaceSiteUrl = comment.PlaceSiteUrl,
                 Region = comment.Region
             };

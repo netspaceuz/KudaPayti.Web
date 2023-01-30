@@ -11,13 +11,17 @@
         {
             <div class="col-lg-4 h-300">
                  <div class="mt-5 md-5 me-5">
-                    <div class="destination-item position-relative overflow-hidden mb-2 ">
-                            <img class="img-fluid" src="@place.ImageUrl" >
-                          <div class="destination-overlay text-white text-decoration-none text-center" href="">
-                             <h4 class="text-white">@place.Title</h4>
-                             <span>@place.Region</span>
+                        <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
+                          <div class="destination-item position-relative overflow-hidden mb-2 ">
+                            
+                                <img class="img-fluid" src="@place.ImageUrl">
+                                  
+                            <div class="destination-overlay text-white text-decoration-none text-center" href="">
+                                 <h4 class="text-white">@place.Title</h4>
+                                   <span>@place.Region</span>
+                            </div>
                           </div>
-                     </div>
+                    </a>  
                  </div>
             </div>
         }

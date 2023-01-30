@@ -23,4 +23,12 @@ public class PlacesController : Controller
         var products = await _place.GetAllAsync(new PaginationParams(page, _pageSize));
         return View("Index",products);
     }
+
+    [HttpGet("{placeId}")]
+    public async Task<ViewResult> GetAsync(long placeId)
+    {
+        var place = await _place.GetAsync(placeId);
+        return View(place);
+    }
 }
+  

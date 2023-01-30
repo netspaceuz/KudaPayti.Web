@@ -25,5 +25,7 @@ public class PlaceBaseViewModel
 
     public long rankedUsersCount { get; set; }
 
+    public string Location_link { get; set; } = String.Empty;
+
     public DateTime CreatedAt { get; set; }= DateTime.UtcNow;
 }

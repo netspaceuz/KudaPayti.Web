@@ -48,7 +48,7 @@ namespace kudapoyti.Service.Services.CommentServices
                 var result = await _repository.SaveChangesAsync();
                 return result > 0;
             }
-            else throw new StatusCodeException(HttpStatusCode.NotFound, "Comment is not found.");
+            else throw new NotFoundException(HttpStatusCode.NotFound, "Comment is not found.");
         }
         public async Task<IEnumerable<CommentsViewModel>> GetByPlaceId(long id, PaginationParams @paginationParams)
         {

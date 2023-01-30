@@ -12,7 +12,7 @@ namespace KudaPayti.Web.Controllers;
 public class PlacesController : Controller
 {
     private readonly IPlaceService _place;
-    private readonly int _pageSize = 10;
+    private readonly int _pageSize = 3;
     public PlacesController(IPlaceService place)
     {
         this._place = place;

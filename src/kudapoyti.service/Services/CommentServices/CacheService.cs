@@ -34,7 +34,7 @@ namespace kudapoyti.Service.Services.CommentServices
                 });
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new StatusCodeException(System.Net.HttpStatusCode.Forbidden, "Verification code time limit expired");
+                    throw new NotFoundException(System.Net.HttpStatusCode.Forbidden, "Verification code time limit expired");
                 }
                 else
                 {

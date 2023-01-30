@@ -44,7 +44,7 @@ namespace kudapoyti.Service.Services.KudaPaytiService
                 var result = await _work.SaveChangesAsync();
                 return result > 0;
             }
-            else throw new StatusCodeException(HttpStatusCode.NotFound, "Admin not found");
+            else throw new NotFoundException(HttpStatusCode.NotFound, "Admin not found");
         }
 
         public async Task<IEnumerable<AdminViewModel>> GetAllAysnc(PaginationParams @params)
@@ -61,7 +61,7 @@ namespace kudapoyti.Service.Services.KudaPaytiService
                 var re= _mapper.Map<AdminViewModel>(get);
                 return re;
             } 
-            else throw new StatusCodeException(HttpStatusCode.NotFound, "Admin not faund");
+            else throw new NotFoundException(HttpStatusCode.NotFound, "Admin not faund");
         }
         
 
@@ -77,7 +77,7 @@ namespace kudapoyti.Service.Services.KudaPaytiService
                 var result = await appDb.SaveChangesAsync();
                 return result > 0;
             }
-            else throw new StatusCodeException(HttpStatusCode.NotFound, "Admin not faund");
+            else throw new NotFoundException(HttpStatusCode.NotFound, "Admin not faund");
         }
     }
 }

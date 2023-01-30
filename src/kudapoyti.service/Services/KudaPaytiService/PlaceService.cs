@@ -60,7 +60,7 @@ public class PlaceService : IPlaceService
             var result = await _repository.SaveChangesAsync();
             return result > 0;
         }
-        else throw new StatusCodeException(HttpStatusCode.NotFound, "Place is not found.");
+        else throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found.");
     }
 
     
@@ -72,7 +72,7 @@ public class PlaceService : IPlaceService
             var res = (PlaceViewModel)place;
             return res;
         }
-        else throw new StatusCodeException(HttpStatusCode.NotFound, "Place is not found");
+        else throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found");
     }
     public async Task<IEnumerable<PlaceViewModel>> GetByKeyword(string keyword)
     {
@@ -82,7 +82,7 @@ public class PlaceService : IPlaceService
             || x.Region.ToLower().Contains(keyword.ToLower()))
             .Select(x =>(PlaceViewModel)x).ToListAsync();
         if (places.Count() != 0) return places;
-        else throw new StatusCodeException(HttpStatusCode.NotFound, $"No info has been found related to {keyword}");
+        else throw new NotFoundException(HttpStatusCode.NotFound, $"No info has been found related to {keyword}");
     }
     public async Task<IEnumerable<PlaceViewModel>> GetByCityAsync(string cityName)
     {
@@ -90,12 +90,12 @@ public class PlaceService : IPlaceService
             .Where(x=>x.Region.ToLower().Contains(cityName.ToLower()))
             .Select(x => (PlaceViewModel)x).ToListAsync();
         if (places.Count() != 0) return places;
-        else throw new StatusCodeException(HttpStatusCode.NotFound, $"No info has been found related to {cityName}");
+        else throw new NotFoundException(HttpStatusCode.NotFound, $"No info has been found related to {cityName}");
     }
     public async Task<bool> UpdateAsync(long id, PlaceUpdateDto updateDto)
     {
         var place = await _repository.Places.FindByIdAsync(id);
-        if (place is null) throw new StatusCodeException(HttpStatusCode.NotFound, "Place is not found");
+        if (place is null) throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found");
         _repository.Entry<Place>(place!).State = EntityState.Detached;
         var updatePlace = (Place)updateDto;
         if (updateDto.Image is not null)
@@ -112,7 +112,7 @@ public class PlaceService : IPlaceService
     public async Task<bool> AddRankPoint(long placeId, int rank)
     {
         var place = await _repository.Places.FindByIdAsync(placeId);
-        if (place is null) throw new StatusCodeException(HttpStatusCode.NotFound, "Place is not found");
+        if (place is null) throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found");
         _repository.Entry<Place>(place!).State = EntityState.Detached;
         place.rankedUsersCount += 1;
         place.Ranked_point += rank;
@@ -150,7 +150,10 @@ public class PlaceService : IPlaceService
                         ImageUrl = product.ImageUrl,
                         Title = product.Title,
                         Region = product.Region,
-                        rank = product.rank
+                        rank = product.rank,
+                        Description=product.Description,
+                        PlaceSiteUrl=product.PlaceSiteUrl,
+                        rankedUsersCount=product.rankedUsersCount
                     };
         return await query.Skip((@params.PageNumber - 1) * @params.PageSize)
                           .Take(@params.PageSize).AsNoTracking()

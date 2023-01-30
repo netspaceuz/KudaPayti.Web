@@ -32,7 +32,7 @@ namespace kudapoyti.Service.Services.CommentServices
             }
             catch
             {
-                throw new StatusCodeException(HttpStatusCode.BadRequest, "Something went wrong");
+                throw new NotFoundException(HttpStatusCode.BadRequest, "Something went wrong");
             }
         }
         public async Task<(bool,string)> VerifyCodeAsync(string email,string code)
@@ -45,9 +45,9 @@ namespace kudapoyti.Service.Services.CommentServices
                     if (realCode.Item1 == code)
                         return (true, _authManager.GenerateToken(realCode.Item2));
                     else if (realCode.Item2 == null)
-                        throw new StatusCodeException(HttpStatusCode.Gone, "Code time limit expired");
+                        throw new NotFoundException(HttpStatusCode.Gone, "Code time limit expired");
                     else
-                        throw new StatusCodeException(HttpStatusCode.Forbidden, "Verification code is wrong");
+                        throw new NotFoundException(HttpStatusCode.Forbidden, "Verification code is wrong");
                 }
                 throw new Exception("There aren't any request of login");
             }

@@ -43,7 +43,7 @@ namespace kudapoyti.Service.Services.CommentServices
             }
             catch (Exception ex)
             {
-                throw new StatusCodeException(System.Net.HttpStatusCode.BadRequest, ex.Message);
+                throw new NotFoundException(System.Net.HttpStatusCode.BadRequest, ex.Message);
             }
         }
     }

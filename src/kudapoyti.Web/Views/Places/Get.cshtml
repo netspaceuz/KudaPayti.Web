@@ -42,73 +42,47 @@
                     
                     <font _mstmutation="1" _msttexthash="1386697" _msthash="48">улица Бобура, 174, Шайхантахурский район</font>
                 </div>
-
-                <section style="background-color: #fff;">
-                    <div class="container my-5 py-5">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-12 col-lg-10 text-lg-left">
-                                <div class="card text-dark">
-                                    <div class="card-body p-4">
-                                        <h4 class="mb-0">Recent comments</h4>
-                                        <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
-
-                                        <div class="d-flex flex-start">
-                                           
-                                            <div>
-                                                <h6 class="fw-bold mb-1">Maggie Marsh</h6>
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <p class="mb-0">
-                                                        March 07, 2021
-                                                        <span class="badge bg-primary">Pending</span>
-                                                    </p>
-                                                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                                                    <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
-                                                    <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
-                                                </div>
-                                                <p class="mb-0">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                                                    industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                                    since the 1500s, when an unknown printer took a galley of type and
-                                                    scrambled it.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <h5 class="mt-5"> Зарегистрируйтесь, чтобы написать комментарий!</h5>
+                <form class="col-lg-5 text-center text-lg-left  mb-lg-2" style="padding: 2px 20px; border-radius: 10px">
+                    <div class="form-group" >
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" style="border-radius: 15px">
                     </div>
-                </section>
-                <form class="col-lg-6 text-center text-lg-left  mb-lg-2" style="padding: 10px 50px; border-radius: 10px">
-                    <div class="form-group ">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
-                        <small id="emailHelp" class="form-text text-muted">Comment yozish un ro'yxatdan o'ting</small>
-                    </div>
-                    <div class="form-group mt-1">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">Email-ingizga xabar jo'natildi'</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" style="border-radius: 15px">
+                    </div>
+
+                    <button type="button" class="btn btn-outline-warning btn-rounded col-lg-4 text-center mb-lg-2" style="border-radius:15px;" data-mdb-ripple-color="dark">Email</button>
+                    
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" style="border-radius: 15px">
                         <small id="emailHelp" class="form-text text-muted">Emailda kelgan Passwordni kiriting</small>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-outline-success btn-rounded" style="border-radius:15px;" data-mdb-ripple-color="dark">Success</button>
+                    
                 </form>
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="textAreaExample6">Message</label>
+                <div class="form-outline mb-2">
                     <textarea class="form-control" id="textAreaExample6" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mb-4">
+                <button type="submit" class="btn btn-primary btn-block mb-3" style="border-radius: 20px">
                     Send
                 </button>
+                <div>
+                    <div class="rating-stars">
+                        <input type="radio" name="rating" id="rs0" checked><label for="rs0"></label>
+                        <input type="radio" name="rating" id="rs1"><label for="rs1"></label>
+                        <input type="radio" name="rating" id="rs2"><label for="rs2"></label>
+                        <input type="radio" name="rating" id="rs3"><label for="rs3"></label>
+                        <input type="radio" name="rating" id="rs4"><label for="rs4"></label>
+                        <input type="radio" name="rating" id="rs5"><label for="rs5"></label>
+                        <span class="rating-counter"></span>
+                    </div>
+                </div>
+               
+
+
             </div>
             <ul class="cinema-content__recommend-list" style="flex-grow: 1; list-style: none; padding-top: 70px; padding-left: 0;">
                 @{
@@ -116,10 +90,14 @@
                     {
                         if (type.Id != Model.Item1.Id)
                         {
-                            <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
-                                <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
-                                    <h3 style="">Cinema</h3>
+                            <a asp-controller="places" asp-action="get" asp-route-placeId="@type.Id">
+                                <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
+                                    <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
+                                    <div class="destination-overlay text-white text-decoration-none text-center" href="">
+                                        <h5 class="text-white">@type.Title</h5>
+                                    </div>
                                 </li>
+                            </a>
                         }
                    }
                }

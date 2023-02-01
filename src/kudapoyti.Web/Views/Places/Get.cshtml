@@ -1,5 +1,5 @@
 ﻿@using kudapoyti.Service.ViewModels
-@model PlaceViewModel
+@model Tuple<PlaceViewModel, List<PlaceViewModel>>
 
 
 @{
@@ -11,15 +11,15 @@
         <div class="cinema-content" style="display: flex; column-gap: 10px;">
             <div class="cinema-content__left" style="width: 70%;">
                 <div>
-                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;" _msttexthash="1849640" _msthash="30">@Model.PlaceSiteUrl</h6>
-                    <h2>@Model.Title</h2>
-                    <img class="img-fluid" src="~/@Model.ImageUrl" width="704" height="467" style="display: inline-block; width: 100%;">
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;" _msttexthash="1849640" _msthash="30">@Model.Item1.PlaceSiteUrl</h6>
+                    <h2>@Model.Item1.Title</h2>
+                    <img class="img-fluid" src="~/@Model.Item1.ImageUrl" width="704" height="467" style="display: inline-block; width: 100%;">
                 </div>
                 <div class="container">
                     <dib class="row">
                         <div b-0vlayvk2yn="" class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
                             <font b-0vlayvk2yn="" class="d-inline-flex align-items-center">
-                                <h6>Published: @Model.CreatedAt</h6>
+                                <h6>Published: @Model.Item1.CreatedAt</h6>
                             </font>
                         </div>
                         <font class="col-lg-6 text-center text-lg-right">
@@ -27,15 +27,15 @@
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" /> 
                              </svg>
-                             @Model.rank
+                             @Model.Item1.rank
                         </font>
                     </dib>
                 </div>
-                <h5 class="text-dark mt-2"><span class="text-primary">Description:  </span>@Model.Description</h5>
+                <h5 class="text-dark mt-2"><span class="text-primary">Description:  </span>@Model.Item1.Description</h5>
                
-                <a class="m-0" href="@Model.Location_link">
+                <a class="m-0" href="@Model.Item1.Location_link">
                     <i class="fa fa-map-marker-alt text-primary mr-2"></i>
-                    <font _mstmutation="1" _msttexthash="1386697" _msthash="48">@Model.Region</font>
+                    <font _mstmutation="1" _msttexthash="1386697" _msthash="48">@Model.Item1.Region</font>
                 </a>
                 
                 <div class="m-0">
@@ -111,14 +111,19 @@
                 </button>
             </div>
             <ul class="cinema-content__recommend-list" style="flex-grow: 1; list-style: none; padding-top: 70px; padding-left: 0;">
-                <li style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
-                    <img src="https://avatars.mds.yandex.net/i?id=42f95c52f93f04d3b98df3dbbc0c55a40420e5f3-8246369-images-thumbs&n=13" alt="img" style="display: inline-block; width: 100%; height: 100%; position: absolute; z-index: -1;">
-                    <h3 style="">Cinema</h3>
-                </li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-            </ul>
+                @{
+                    foreach (var type in Model.Item2)
+                    {
+                        if (type.Id != Model.Item1.Id)
+                        {
+                            <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
+                                <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
+                                    <h3 style="">Cinema</h3>
+                                </li>
+                        }
+                   }
+               }
+           </ul>
         </div>
     </div>
 </section>   

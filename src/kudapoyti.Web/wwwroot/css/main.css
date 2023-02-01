@@ -10585,3 +10585,18 @@ h6,
 .cinema-content__recommend-list{
     list-style: none;
 }
+
+.list__item{
+    cursor: pointer;
+}
+
+
+.list__item img {
+    filter: brightness(0.4);
+    transition: .3s linear;
+}
+
+.list__item:hover img{
+    transform: scale(1.1);
+    filter: brightness(0.6);
+}

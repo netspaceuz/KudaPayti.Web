@@ -1,5 +1,6 @@
 ﻿using kudapoyti.Service.Common.Utils;
 using kudapoyti.Service.Interfaces;
+using kudapoyti.Service.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -28,7 +29,9 @@ public class PlacesController : Controller
     public async Task<ViewResult> GetAsync(long placeId)
     {
         var place = await _place.GetAsync(placeId);
-        return View(place);
+        var placetype= await _place.GetByTypeAsync(new PaginationParams(1,3),place.PlaceSiteUrl);
+        var tuple = new Tuple<PlaceViewModel, List<PlaceViewModel>>(place, placetype.ToList());
+        return View(tuple);
     }
 }
   

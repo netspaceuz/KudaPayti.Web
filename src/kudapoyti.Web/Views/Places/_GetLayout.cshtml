@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - kudapoyti.Web</title>
+    <link href="~/Images/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <link href="~/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid position-relative nav-bar p-3">
+        <div class="container-lg position-relative p-2 mt-1">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-1 py-lg-3 pl-1 pl-lg-4">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">Kuda</span>Poyti</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0" style="column-gap: 10px;">
+                        <a href="index.html"  style="padding: 5px 15px; border-radius:10px; box-shadow:0 0 1px 1px;">Restaurant</a>
+                        <a href="about.html"  style="padding: 5px 15px; border-radius:10px; box-shadow:0 0 1px 1px;">Party</a>
+                        <a href="service.html" style="padding: 5px 15px; border-radius:10px; box-shadow:0 0 1px 1px;">Consert</a>
+                        <a href="contact.html"  style="padding: 5px 15px; border-radius:10px; box-shadow:0 0 1px 1px;">Park</a>
+                        <a href="contact.html" style="padding: 5px 15px; border-radius:10px; box-shadow:0 0 1px 1px;">Kino</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <main class="pb-3 mt-5">
+            @RenderBody()
+        </main>
+        
+    </div>
+
+</body>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/main.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</html>

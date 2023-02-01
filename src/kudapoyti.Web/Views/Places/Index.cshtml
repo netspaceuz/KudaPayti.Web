@@ -21,7 +21,7 @@
                                    <span>@place.Region</span>
                             </div>
                           </div>
-                    </a>  
+                        </a>  
                  </div>
             </div>
         }
@@ -36,6 +36,7 @@
             {
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="package-item bg-white mb-2">
+                      <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
                         <img class="img-fluid" src="@place.ImageUrl" alt="">
                         <div class="p-4">
                             <div class="d-flex justify-content-between mb-3">
@@ -50,6 +51,7 @@
                                 </div>
                             </div>
                         </div>
+                      </a>
                     </div>
                 </div>
             }

@@ -1,8 +1,124 @@
 ﻿@using kudapoyti.Service.ViewModels
 @model PlaceViewModel
 
-<h1>@Model.Id</h1>
-<img class="img-fluid" src="~/@Model.ImageUrl">
-<h2>@Model.Title</h2>
-<h3>@Model.Region</h3>
-<h4>@Model.Description</h4>
+
+@{
+    Layout = "_GetLayout.cshtml";
+}
+
+<section class="cinema">
+    <div class="container">
+        <div class="cinema-content" style="display: flex;">
+            <div class="cinema-content__left" style="width: 70%;">
+                <div>
+                    <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;" _msttexthash="1849640" _msthash="30">@Model.PlaceSiteUrl</h6>
+                    <h2>@Model.Title</h2>
+                    <img class="img-fluid" src="~/@Model.ImageUrl" width="704" height="467" style="display: inline-block; width: 100%;">
+                </div>
+                <div class="container">
+                    <dib class="row">
+                        <div b-0vlayvk2yn="" class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
+                            <font b-0vlayvk2yn="" class="d-inline-flex align-items-center">
+                                <h6>Published: @Model.CreatedAt</h6>
+                            </font>
+                        </div>
+                        <font class="col-lg-6 text-center text-lg-right">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" /> 
+                             </svg>
+                             @Model.rank
+                        </font>
+                    </dib>
+                </div>
+                <h5 class="text-dark mt-2"><span class="text-primary">Description:  </span>@Model.Description</h5>
+               
+                <a class="m-0" href="@Model.Location_link">
+                    <i class="fa fa-map-marker-alt text-primary mr-2"></i>
+                    <font _mstmutation="1" _msttexthash="1386697" _msthash="48">@Model.Region</font>
+                </a>
+                
+                <div class="m-0">
+                    
+                    <font _mstmutation="1" _msttexthash="1386697" _msthash="48">улица Бобура, 174, Шайхантахурский район</font>
+                </div>
+
+                <section style="background-color: #fff;">
+                    <div class="container my-5 py-5">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 col-lg-10 text-lg-left">
+                                <div class="card text-dark">
+                                    <div class="card-body p-4">
+                                        <h4 class="mb-0">Recent comments</h4>
+                                        <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
+
+                                        <div class="d-flex flex-start">
+                                           
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Maggie Marsh</h6>
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <p class="mb-0">
+                                                        March 07, 2021
+                                                        <span class="badge bg-primary">Pending</span>
+                                                    </p>
+                                                    <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                                                    <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                                                    <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                                                </div>
+                                                <p class="mb-0">
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                                    industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                                    since the 1500s, when an unknown printer took a galley of type and
+                                                    scrambled it.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <form class="col-lg-6 text-center text-lg-left  mb-lg-2" style="padding: 10px 50px; border-radius: 10px">
+                    <div class="form-group ">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+                        <small id="emailHelp" class="form-text text-muted">Comment yozish un ro'yxatdan o'ting</small>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">Email-ingizga xabar jo'natildi'</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <small id="emailHelp" class="form-text text-muted">Emailda kelgan Passwordni kiriting</small>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="textAreaExample6">Message</label>
+                    <textarea class="form-control" id="textAreaExample6" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Send
+                </button>
+            </div>
+            <ul class="cinema-content__recommend-list" style="flex-grow: 1;">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </div>
+</section>   
+
+
+

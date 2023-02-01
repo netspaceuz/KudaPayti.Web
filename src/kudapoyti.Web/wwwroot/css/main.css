@@ -10322,7 +10322,7 @@ h6,
 }
 
 .navbar-light .navbar-nav .nav-link {
-    padding: 30px 15px;
+    
     color: #212121;
     font-weight: 500;
     outline: none;
@@ -10330,6 +10330,7 @@ h6,
 
     .navbar-light .navbar-nav .nav-link:hover,
     .navbar-light .navbar-nav .nav-link.active {
+       
         color: #7AB730;
     }
 
@@ -10579,7 +10580,5 @@ h6,
     padding: 0;
     list-style-type: none;
 }
-
-
 
 

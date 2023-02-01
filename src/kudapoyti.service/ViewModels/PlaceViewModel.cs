@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace kudapoyti.Service.ViewModels
 {
-    public class PlaceViewModel
+    public class PlaceViewModel:Attribute
     {
         public long Id { get; set; }
 
@@ -23,7 +23,10 @@ namespace kudapoyti.Service.ViewModels
 
         public string PlaceSiteUrl { get; set; } = String.Empty;
 
+        public long rankedUsersCount { get; set; }
+
         public string Region { get; set; } = String.Empty;
+        public DateTime CreatedAt { get; private set; }
 
         public static implicit operator PlaceViewModel(Place comment)
         {
@@ -36,7 +39,10 @@ namespace kudapoyti.Service.ViewModels
                 rank = comment.rank,
                 Location_link = comment.Location_link,
                 PlaceSiteUrl = comment.PlaceSiteUrl,
-                Region = comment.Region
+                Region = comment.Region,
+                CreatedAt=comment.CreatedAt,
+                rankedUsersCount=comment.rankedUsersCount
+
             };
         }
 

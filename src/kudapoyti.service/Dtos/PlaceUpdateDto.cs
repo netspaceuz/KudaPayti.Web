@@ -12,12 +12,12 @@ public class PlaceUpdateDto
 {
     [Required(ErrorMessage = "Please enter a title that contains minimum 5 and maximum 50 characters.")]
     [MinLength(5)]
-    [MaxLength(50)]
+    [MaxLength(150)]
     public string Title { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Please enter a description that contains minimum 10 and maximum 100 characters.")]
     [MinLength(10)]
-    [MaxLength(100)]
+    [MaxLength(1000)]
     public string Description { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Plase etner the link of the location.")]

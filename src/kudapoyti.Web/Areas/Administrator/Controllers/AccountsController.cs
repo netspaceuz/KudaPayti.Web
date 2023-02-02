@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace kudapoyti.Web.Areas.Administrator.Controllers
 {
+    [Area("administrator")]
     [Route("accounts")]
     public class AccountsController : Controller
     {
@@ -36,7 +37,7 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
                         HttpOnly = true,
                         SameSite = SameSiteMode.Strict
                     });
-                    return RedirectToAction("Index", "Home", new { area = "" });
+                    return RedirectToAction("Index", "Places", new { area = "" });
                 }
                 catch (ModelErrorException modelError)
                 {

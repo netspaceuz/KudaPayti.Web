@@ -1,12 +1,10 @@
 using kudapoyti.Web.Configurations.LayerConfigurations;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataAccess(builder.Configuration);
 builder.Services.AddService();
-
-
-
 
 var app = builder.Build();
 
@@ -20,6 +18,18 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseStatusCodePages(async context =>
+{
+    if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+    {
+        context.HttpContext.Response.Redirect("accounts/login");
+    }
+});
+app.MapAreaControllerRoute(
+   name: "administrator",
+   areaName: "Administrator",
+   pattern: "accounts/{controller=Home}/{action=Index}/{id?}");
+
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",

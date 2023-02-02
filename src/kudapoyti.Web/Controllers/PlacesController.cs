@@ -33,5 +33,6 @@ public class PlacesController : Controller
         var tuple = new Tuple<PlaceViewModel, List<PlaceViewModel>>(place, placetype.ToList());
         return View(tuple);
     }
+
 }
   

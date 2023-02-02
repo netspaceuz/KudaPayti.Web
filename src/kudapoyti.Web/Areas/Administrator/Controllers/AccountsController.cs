@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace kudapoyti.Web.Areas.Administrator.Controllers
 {
     [Area("administrator")]
-    [Route("accounts")]
+    [Route("admin")]
     public class AccountsController : Controller
     {
         private readonly IAdminRegistrService _service;
@@ -67,7 +67,7 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
                 bool result = await _service.RegisterAsync(accountRegisterDto);
                 if (result)
                 {
-                    return RedirectToAction("login", "accounts", new { area = "" });
+                    return RedirectToAction("login", "admin", new { area = "" });
                 }
                 else
                 {

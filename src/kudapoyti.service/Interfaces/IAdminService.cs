@@ -17,5 +17,6 @@ namespace kudapoyti.Service.Interfaces
         public Task<AdminViewModel> GetAysnc(long id);
         public Task<bool> UpdateAysnc(long id,UpdateCreateDto dto);    
         public Task<bool> DeleteAysnc(long id);
+     
     }
 }

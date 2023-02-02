@@ -22,13 +22,13 @@ app.UseStatusCodePages(async context =>
 {
     if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
     {
-        context.HttpContext.Response.Redirect("accounts/login");
+        context.HttpContext.Response.Redirect("admin/login");
     }
 });
 app.MapAreaControllerRoute(
    name: "administrator",
    areaName: "Administrator",
-   pattern: "accounts/{controller=Home}/{action=Index}/{id?}");
+   pattern: "admin/{controller=Home}/{action=Index}/{id?}");
 
 app.UseAuthorization();
 app.MapControllerRoute(

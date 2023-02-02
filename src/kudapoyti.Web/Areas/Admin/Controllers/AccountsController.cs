@@ -4,10 +4,9 @@ using kudapoyti.Service.Dtos.AdminAccountDtos;
 using kudapoyti.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace kudapoyti.Web.Areas.Administrator.Controllers
+namespace kudapoyti.Web.Areas.Admin.Controllers
 {
-    [Area("administrator")]
-    [Route("admin")]
+    [Area("admin")]
     public class AccountsController : Controller
     {
         private readonly IAdminRegistrService _service;
@@ -18,13 +17,13 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet("login")]
+        [HttpGet]
         public ViewResult Login()
         {
             return View("Login");
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<IActionResult> LoginAsync(AdminAccountLoginDto adminAccountLogin)
         {
             if (ModelState.IsValid)
@@ -37,7 +36,7 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
                         HttpOnly = true,
                         SameSite = SameSiteMode.Strict
                     });
-                    return RedirectToAction("Index", "Places", new { area = "" });
+                    return RedirectToAction("Index", "Home", new { area = "admin" });
                 }
                 catch (ModelErrorException modelError)
                 {
@@ -53,13 +52,12 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
 
         }
 
-        [HttpGet("register")]
         public ViewResult Register()
         {
             return View("Register");
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<IActionResult> RegisterAsync(AdminRegisterDto accountRegisterDto)
         {
             if (ModelState.IsValid)
@@ -67,7 +65,7 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
                 bool result = await _service.RegisterAsync(accountRegisterDto);
                 if (result)
                 {
-                    return RedirectToAction("login", "admin", new { area = "" });
+                    return RedirectToAction("login", "accounts", new { area = "admin" });
                 }
                 else
                 {
@@ -76,5 +74,6 @@ namespace kudapoyti.Web.Areas.Administrator.Controllers
             }
             else return Register();
         }
+
     }
 }

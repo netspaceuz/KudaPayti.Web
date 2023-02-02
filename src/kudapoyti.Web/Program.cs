@@ -25,12 +25,13 @@ app.UseStatusCodePages(async context =>
         context.HttpContext.Response.Redirect("admin/login");
     }
 });
-app.MapAreaControllerRoute(
-   name: "administrator",
-   areaName: "Administrator",
-   pattern: "admin/{controller=Home}/{action=Index}/{id?}");
-
 app.UseAuthorization();
+
+app.MapAreaControllerRoute(
+   name: "admin",
+   areaName: "Admin",
+   pattern: "admins/{controller=accounts}/{action=login}");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

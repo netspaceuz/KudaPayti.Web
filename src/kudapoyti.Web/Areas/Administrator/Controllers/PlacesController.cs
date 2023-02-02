@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace kudapoyti.Web.Areas.Administrator.Controllers
 {
     [Area("administrator")]
-    [Route("admins/places")]
+    [Route("administrator/places")]
     public class PlacesController : Controller
     {
         private readonly IPlaceService _place;

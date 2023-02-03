@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace kudapoyti.Service.ViewModels;
+﻿namespace kudapoyti.Service.ViewModels;
 
 public class PlaceBaseViewModel
 {
@@ -27,5 +20,5 @@ public class PlaceBaseViewModel
 
     public string Location_link { get; set; } = String.Empty;
 
-    public DateTime CreatedAt { get; set; }= DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; }
 }

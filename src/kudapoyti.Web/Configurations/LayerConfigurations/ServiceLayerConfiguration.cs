@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using kudapoyti.DataAccess.Interfaces;
+﻿using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.DataAccess.Repositories;
 using kudapoyti.Service.Common.Security;
 using kudapoyti.Service.Interfaces;
@@ -10,7 +9,7 @@ using kudapoyti.Web.Configuration;
 
 namespace kudapoyti.Web.Configurations.LayerConfigurations
 {
-    public static class  ServiceLayerConfiguration
+    public static class ServiceLayerConfiguration
     {
         public static void AddService(this IServiceCollection services)
         {
@@ -28,6 +27,6 @@ namespace kudapoyti.Web.Configurations.LayerConfigurations
             services.AddAutoMapper(typeof(MappingConfiguration));
         }
 
-     
+
     }
 }

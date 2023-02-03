@@ -28,7 +28,7 @@ namespace kudapoyti.Web.Areas.Admin.Controllers
         public async Task<ViewResult> Delete(long Id)
         {
             var admin = await _place.GetAysnc(Id);
-            if(admin != null)
+            if (admin != null)
             {
                 return View(admin);
             }
@@ -43,6 +43,6 @@ namespace kudapoyti.Web.Areas.Admin.Controllers
         }
 
     }
-   
+
 
 }

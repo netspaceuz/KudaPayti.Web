@@ -1,16 +1,10 @@
 ﻿using kudapoyti.Domain.Entities.Admins;
-using kudapoyti.Service.Common.Helpers;
 using kudapoyti.Service.Dtos.AccountDTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Common.Security
 {
@@ -23,7 +17,7 @@ namespace kudapoyti.Service.Common.Security
         }
         public string GenerateToken(dynamic admin)
         {
-            if(admin.GetType() == typeof(UserValidateDto))
+            if (admin.GetType() == typeof(UserValidateDto))
             {
                 admin = (Admin1)admin;
             };

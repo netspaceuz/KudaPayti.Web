@@ -1,13 +1,60 @@
 ﻿@using kudapoyti.Service.ViewModels
-@model List<PlaceBaseViewModel>
+@model Tuple<List<PlaceBaseViewModel>, List<PlaceViewModel>>
 
 <div  >
+    <div class="container-fluid booking mt-5 pb-5">
+        <div class="container pb-5">
+            <div class="bg-light shadow" style="padding: 20px;">
+                <div class="row align-items-center mx-5" style="min-height: 50px;">
+                    <div class="col-md-10" style="column-gap: 10px;">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="mb-3 mb-md-0">
+                                    <select class="custom-control-inline px-4" style="height: 47px; border-radius:10px">
+                                        <option selected>Regions </option>
+                                        <option value="1">Duration 1</option>
+                                        <option value="2">Duration 1</option>
+                                        <option value="3">Duration 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3 mb-md-0">
+                                    <select class="custom-control px-4" style="height: 47px; border-radius:10px">
+                                        <option selected>Category </option>
+                                        <option value="1">News</option>
+                                        <option value="2">Kino</option>
+                                        <option value="3">Consert</option>
+                                        <option value="4">Hostel</option>
+                                        <option value="5">Historical</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="input-group">
+                                    <div class="form-outline">
+                                        <input id="search-input" type="search" class="form-control" placeholder="search..." style="height:47px; border-radius: 10px;" />
+                                    </div>
+                                    <button id="search-button" type="button" class="btn btn-primary" style="border-radius:10px;">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: auto; border-radius: 12px;">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="text-center mb-50 mt-50">
             <h2 class="text-primary text-uppercase">Recommended</h2>
         </div>
     <div class="row g-5">
     @{
-        foreach(var place in Model)
+        foreach(var place in Model.Item1)
         {
             <div class="col-lg-4 h-300">
                  <div class="mt-5 md-5 me-5">
@@ -32,28 +79,32 @@
     </div>
     <div class="row g-5">
         @{
-            foreach(var place in Model)
+            foreach(var place in Model.Item2)
             {
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                      <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
-                        <img class="img-fluid" src="@place.ImageUrl" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>@place.Region</small>
-                                <small class="m-0"><i class="fa fa-list-alt text-primary mr-2"></i>@place.PlaceSiteUrl</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">@place.Title</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>@place.rank <small>(@place.rankedUsersCount)</small></h6>
-                                    <h7 class="m-0">DataTime @place.CreatedAt</h7>
+                if (place.PlaceSiteUrl == "Party")
+                {   
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-item bg-white mb-2">
+                            <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
+                                <img class="img-fluid" src="@place.ImageUrl" alt="">
+                                <div class="p-4">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>@place.Region</small>
+                                        <small class="m-0"><i class="fa fa-list-alt text-primary mr-2"></i>@place.PlaceSiteUrl</small>
+                                    </div>
+                                    <a class="h5 text-decoration-none" href="">@place.Title</a>
+                                    <div class="border-top mt-4 pt-4">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>@place.rank <small>(@place.rankedUsersCount)</small></h6>
+                                            <h7 class="m-0">@place.CreatedAt</h7>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                      </a>
                     </div>
-                </div>
+
+                }
             }
         }
 

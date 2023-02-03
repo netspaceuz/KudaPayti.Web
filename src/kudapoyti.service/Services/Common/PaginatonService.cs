@@ -3,15 +3,10 @@ using kudapoyti.Service.Interfaces.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Services.Common
 {
-    public class PaginatonService:IPaginationService
+    public class PaginatonService : IPaginationService
     {
         private readonly IHttpContextAccessor _accessor;
         public PaginatonService(IHttpContextAccessor accessor)

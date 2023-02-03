@@ -1,12 +1,7 @@
 ﻿using kudapoyti.Domain.Entities.Admins;
 using kudapoyti.Service.Common.Attributes;
 using kudapoyti.Service.Common.Security;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Dtos.AdminAccountDtos;
 

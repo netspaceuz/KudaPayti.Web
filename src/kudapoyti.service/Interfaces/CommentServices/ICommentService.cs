@@ -1,12 +1,6 @@
 ﻿using kudapoyti.Service.Common.Utils;
-using kudapoyti.Service.Dtos;
 using kudapoyti.Service.Dtos.CommentDtos;
 using kudapoyti.Service.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Interfaces.CommentServices
 {

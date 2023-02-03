@@ -1,17 +1,12 @@
 ﻿using kudapoyti.Domain.Entities.Places;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.ViewModels
 {
-    public class PlaceViewModel:Attribute
+    public class PlaceViewModel : Attribute
     {
         public long Id { get; set; }
 
-        public string ImageUrl { get; set; }=String.Empty;
+        public string ImageUrl { get; set; } = String.Empty;
 
         public string Title { get; set; } = string.Empty;
 
@@ -26,7 +21,7 @@ namespace kudapoyti.Service.ViewModels
         public long rankedUsersCount { get; set; }
 
         public string Region { get; set; } = String.Empty;
-        public DateTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get;set; }
 
         public static implicit operator PlaceViewModel(Place comment)
         {
@@ -40,12 +35,11 @@ namespace kudapoyti.Service.ViewModels
                 Location_link = comment.Location_link,
                 PlaceSiteUrl = comment.PlaceSiteUrl,
                 Region = comment.Region,
-                CreatedAt=comment.CreatedAt,
-                rankedUsersCount=comment.rankedUsersCount
+                CreatedAt = comment.CreatedAt,
+                rankedUsersCount = comment.rankedUsersCount
 
             };
         }
 
-    } 
+    }
 }
-  

@@ -3,22 +3,17 @@ using kudapoyti.Service.Dtos.AccountDTOs;
 using kudapoyti.Service.Interfaces.CommentServices;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Services.CommentServices
 {
-    public class CacheService:ICacheService
+    public class CacheService : ICacheService
     {
         private IMemoryCache _cache;
         public CacheService(IMemoryCache memoryCache)
         {
-            _cache= memoryCache;
+            _cache = memoryCache;
         }
-        public async Task<(string,UserValidateDto)> GetValueAsync(string email)
+        public async Task<(string, UserValidateDto)> GetValueAsync(string email)
         {
             try
             {
@@ -39,16 +34,16 @@ namespace kudapoyti.Service.Services.CommentServices
                 else
                 {
                     var targetuser = JsonConvert.DeserializeObject<UserValidateDto>(user);
-                    return (value,targetuser);
+                    return (value, targetuser);
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-        
-        public async Task SetValueAsync(string email,string code,UserValidateDto user)
+
+        public async Task SetValueAsync(string email, string code, UserValidateDto user)
         {
             var userJson = JsonConvert.SerializeObject(user);
             await Task.Run(() => _cache.Set($"{email}", userJson, TimeSpan.FromMinutes(5)));

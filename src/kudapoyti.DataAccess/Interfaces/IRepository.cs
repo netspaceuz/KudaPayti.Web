@@ -1,12 +1,5 @@
 ﻿using kudapoyti.Domain.Common;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.DataAccess.Interfaces
 {
@@ -20,6 +13,6 @@ namespace kudapoyti.DataAccess.Interfaces
 
         public void DeleteAsync(long id);
 
-        public void UpdateAsync(long id ,T entity);
+        public void UpdateAsync(long id, T entity);
     }
 }

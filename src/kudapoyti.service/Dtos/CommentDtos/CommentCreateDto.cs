@@ -1,14 +1,7 @@
 ﻿using kudapoyti.Domain.Entities.Comment;
-using kudapoyti.Domain.Entities.Places;
-using kudapoyti.Service.Common.Constants;
 using kudapoyti.Service.Common.Helpers;
 using kudapoyti.Service.Helpers;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Dtos.CommentDtos
 {

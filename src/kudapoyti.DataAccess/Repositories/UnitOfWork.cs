@@ -9,12 +9,6 @@ using kudapoyti.DataAccess.Repositories.Comments;
 using kudapoyti.DataAccess.Repositories.Photos;
 using kudapoyti.DataAccess.Repositories.Places;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.DataAccess.Repositories
 {
@@ -26,7 +20,7 @@ namespace kudapoyti.DataAccess.Repositories
 
         public ICommentsRepository Comments { get; }
 
-        public IPhotoRepository Photos { get; } 
+        public IPhotoRepository Photos { get; }
 
         public IPlaceRepository Places { get; }
 

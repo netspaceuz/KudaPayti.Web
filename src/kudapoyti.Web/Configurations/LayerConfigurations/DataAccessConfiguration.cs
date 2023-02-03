@@ -2,7 +2,6 @@
 using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 
 namespace kudapoyti.Web.Configurations.LayerConfigurations
 {

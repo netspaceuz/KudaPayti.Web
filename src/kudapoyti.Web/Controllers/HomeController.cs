@@ -15,7 +15,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        return RedirectToAction("Index", "places", new { area = "" });
+    }
+
+    public IActionResult About()
+    {
+        return View("About");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

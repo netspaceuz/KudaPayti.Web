@@ -1,28 +1,14 @@
-﻿using AutoMapper;
-using kudapoyti.DataAccess.DbConstexts;
-using kudapoyti.DataAccess.Interfaces;
-using kudapoyti.Service.Interfaces;
-using kudapoyti.Service.ViewModels;
+﻿using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.Domain.Entities.Places;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using kudapoyti.Service.Common.Helpers;
 using kudapoyti.Service.Common.Exceptions;
-using System.Net;
-using kudapoyti.Service.Dtos;
-using kudapoyti.Service.Interfaces.Common;
+using kudapoyti.Service.Common.Helpers;
 using kudapoyti.Service.Common.Utils;
-using kudapoyti.Service.Services.Common;
-using kudapoyti.DataAccess.Repositories;
+using kudapoyti.Service.Dtos;
+using kudapoyti.Service.Interfaces;
+using kudapoyti.Service.Interfaces.Common;
+using kudapoyti.Service.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.OpenApi.Writers;
-using kudapoyti.Domain.Entities.Comment;
+using System.Net;
 
 namespace kudapoyti.Service.Services.kudapoytiService;
 
@@ -32,7 +18,7 @@ public class PlaceService : IPlaceService
     private readonly IUnitOfWork _repository;
     private readonly IImageService _imageService;
 
-    public PlaceService(IUnitOfWork unitOfWork,IImageService imageService ,IPaginationService paginatorService)
+    public PlaceService(IUnitOfWork unitOfWork, IImageService imageService, IPaginationService paginatorService)
     {
         this._paginator = paginatorService;
         this._repository = unitOfWork;
@@ -64,9 +50,9 @@ public class PlaceService : IPlaceService
         else throw new NotFoundException(HttpStatusCode.NotFound, "Place is not found.");
     }
 
-    
+
     public async Task<PlaceViewModel> GetAsync(long id)
-    { 
+    {
         var place = await _repository.Places.FindByIdAsync(id);
         if (place is not null)
         {
@@ -88,17 +74,18 @@ public class PlaceService : IPlaceService
     public async Task<IEnumerable<PlaceViewModel>> GetByKeyword(string keyword)
     {
         IEnumerable<PlaceViewModel> places = await _repository.Places
-            .Where(x=>x.Title.ToLower().Contains(keyword.ToLower())
+            .Where(x => x.Title.ToLower().Contains(keyword.ToLower())
             || x.Description.ToLower().Contains(keyword.ToLower())
             || x.Region.ToLower().Contains(keyword.ToLower()))
-            .Select(x =>(PlaceViewModel)x).ToListAsync();
+            .Select(x => (PlaceViewModel)x).ToListAsync();
         if (places.Count() != 0) return places;
         else throw new NotFoundException(HttpStatusCode.NotFound, $"No info has been found related to {keyword}");
     }
+
     public async Task<IEnumerable<PlaceViewModel>> GetByCityAsync(string cityName)
     {
         IEnumerable<PlaceViewModel> places = await _repository.Places
-            .Where(x=>x.Region.ToLower().Contains(cityName.ToLower()))
+            .Where(x => x.Region.ToLower().Contains(cityName.ToLower()))
             .Select(x => (PlaceViewModel)x).ToListAsync();
         if (places.Count() != 0) return places;
         else throw new NotFoundException(HttpStatusCode.NotFound, $"No info has been found related to {cityName}");
@@ -127,20 +114,24 @@ public class PlaceService : IPlaceService
         _repository.Entry<Place>(place!).State = EntityState.Detached;
         place.rankedUsersCount += 1;
         place.Ranked_point += rank;
-        place.rank = place.Ranked_point/ place.rankedUsersCount;
+        place.rank = place.Ranked_point / place.rankedUsersCount;
 
         _repository.Places.UpdateAsync(placeId, place);
         var result = await _repository.SaveChangesAsync();
         return result > 0;
     }
 
-    public async Task<IEnumerable<PlaceViewModel>> GetTopPLacesAsync()
+    public async Task<IEnumerable<PlaceViewModel>> GetTopPLacesAsync(string placeUrl)
     {
+        if(placeUrl is not null)
+            return await _repository.Places.GetAll().Where(x => x.PlaceSiteUrl == placeUrl).OrderByDescending(x => x)
+                   .Take(10).Select(x => (PlaceViewModel)x).AsNoTracking().ToListAsync();
+
         return await _repository.Places.GetAll().OrderByDescending(x => x)
-            .Take(10).Select(x =>(PlaceViewModel)x).ToListAsync();
+               .Take(10).Select(x => (PlaceViewModel)x).AsNoTracking().ToListAsync();
     }
 
-    public async Task<IEnumerable<PlaceViewModel>> GetByTypeAsync(PaginationParams @paginationParams,string type)
+    public async Task<IEnumerable<PlaceViewModel>> GetByTypeAsync(PaginationParams @paginationParams, string type)
     {
         var query = _repository.Places.GetAll().Where(x => x.PlaceSiteUrl == $"{type}").Select(x => (PlaceViewModel)x);
         return await _paginator.ToPagedAsync(query, @paginationParams.PageNumber, @paginationParams.PageSize);
@@ -148,13 +139,13 @@ public class PlaceService : IPlaceService
     public async Task<IEnumerable<string>> GetOtherTypes()
     {
         var alreadyHavetypes = new List<string> { "Отели", "Развлечения", "Рестораны", "Рассказы о путешествиях", "Авиабилеты" };
-        return await _repository.Places.GetAll().Where(x=>!alreadyHavetypes.Contains(x.PlaceSiteUrl))
-            .Select(x=>x.PlaceSiteUrl).ToListAsync();
+        return await _repository.Places.GetAll().Where(x => !alreadyHavetypes.Contains(x.PlaceSiteUrl))
+            .Select(x => x.PlaceSiteUrl).ToListAsync();
     }
 
-     public async Task<IEnumerable<PlaceBaseViewModel>> GetAllAsync(PaginationParams @params)
+    public async Task<IEnumerable<PlaceBaseViewModel>> GetAllAsync(PaginationParams @params)
     {
-        var query = from product in _repository.Places.GetAll().OrderBy(x => x.rank)
+        var query = from product in _repository.Places.GetAll().OrderByDescending(x => x.CreatedAt)
                     select new PlaceBaseViewModel()
                     {
                         Id = product.Id,
@@ -162,13 +153,14 @@ public class PlaceService : IPlaceService
                         Title = product.Title,
                         Region = product.Region,
                         rank = product.rank,
-                        Description=product.Description,
-                        PlaceSiteUrl=product.PlaceSiteUrl,
-                        rankedUsersCount=product.rankedUsersCount
+                        Description = product.Description,
+                        PlaceSiteUrl = product.PlaceSiteUrl,
+                        rankedUsersCount = product.rankedUsersCount,
+                        CreatedAt=product.CreatedAt
                     };
         return await query.Skip((@params.PageNumber - 1) * @params.PageSize)
                           .Take(@params.PageSize).AsNoTracking()
                           .ToListAsync();
     }
-    
+
 }

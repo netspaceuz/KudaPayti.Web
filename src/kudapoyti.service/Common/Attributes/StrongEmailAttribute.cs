@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class StrongEmailAttribute:ValidationAttribute
+    public class StrongEmailAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            if(value is string email)
+            if (value is string email)
             {
                 if (IsValidEmail(email))
                     return ValidationResult.Success;

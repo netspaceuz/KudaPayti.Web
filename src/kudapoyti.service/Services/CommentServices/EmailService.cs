@@ -1,14 +1,7 @@
 ﻿using kudapoyti.Service.Common.Exceptions;
 using kudapoyti.Service.Dtos.AccountDTOs;
-using kudapoyti.Service.Dtos.Common;
 using kudapoyti.Service.Interfaces.CommentServices;
-using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Services.CommentServices
 {
@@ -39,7 +32,7 @@ namespace kudapoyti.Service.Services.CommentServices
                 mail.Body = "Пожалуйста, подтвердите свой адрес электронной почты." +
                     $"Проверочный код - {rand_num}";
                 await smtp.SendMailAsync(mail);
-                await _cacheService.SetValueAsync(user.Email,rand_num.ToString(),user);
+                await _cacheService.SetValueAsync(user.Email, rand_num.ToString(), user);
             }
             catch (Exception ex)
             {

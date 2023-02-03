@@ -1,20 +1,12 @@
-﻿using kudapoyti.Service.Common.Exceptions;
-using kudapoyti.Service.Interfaces;
+﻿using kudapoyti.Service.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.OpenApi.Expressions;
-using NpgsqlTypes;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.Service.Common.Attributes
 {
-    public class AuthenticationAttribute:IAuthenticationAttribute
+    public class AuthenticationAttribute : IAuthenticationAttribute
     {
-        public bool IsAuthed(List<string> rols,HttpContext httpContext)
+        public bool IsAuthed(List<string> rols, HttpContext httpContext)
         {
             var token = "";
             try
@@ -32,7 +24,7 @@ namespace kudapoyti.Service.Common.Attributes
             {
                 return false;
             }
-            
+
         }
     }
 }

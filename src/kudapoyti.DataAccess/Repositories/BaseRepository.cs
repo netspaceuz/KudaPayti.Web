@@ -2,12 +2,7 @@
 using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.Domain.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kudapoyti.DataAccess.Repositories
 {
@@ -22,13 +17,13 @@ namespace kudapoyti.DataAccess.Repositories
             _dbset = dbContext.Set<T>();
         }
 
-        public void CreateAsync(T entity)=> _dbset.Add(entity);
-        
+        public void CreateAsync(T entity) => _dbset.Add(entity);
+
 
         public void DeleteAsync(long id)
         {
             var entity = _dbset.Find(id);
-            if(entity is not null)
+            if (entity is not null)
                 _dbset.Remove(entity);
         }
 

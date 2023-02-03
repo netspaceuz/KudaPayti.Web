@@ -2,61 +2,128 @@
 
 <html>
 <head>
-    <link rel="shortcut icon" href="~/Assets/images/favicon.png" type="">
-    <title> TwistFood </title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - kudapoyti.Web</title>
+    <link href="~/Images/favicon.ico" rel="icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <link href="~/css/main.css" rel="stylesheet">
 </head>
 <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand " asp-controller="Home" asp-action="index" asp-area="admin"><h3 style="color:white">TwistFood</h3></a>
-                <ul class="nav d-flex">
-                    <!-- User Profile-->
-                    <li class="mx-3">
-                        <a class="btn btn-secondary" asp-area="admin" asp-controller="orders" asp-action="index">Orders</a>
-                    </li>
-                    <li class="mx-3">
-                        <a class="btn btn-secondary" asp-controller="categories" asp-action="index">Categories</a>
-                    </li>
-                    <li class="mx-3">
-                        <a class="btn btn-secondary" asp-area="admin" asp-controller="products" asp-action="index">Products</a>
-                    </li>
-                    <li class="mx-3 ">
-                        <a class="btn btn-secondary" asp-controller="home" asp-action="index">Employees</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control" style="width:250px" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary mx-2" type="submit">Search</button>
-                </form>
+        <!-- Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid justify-content-between">
+                <!-- Left elements -->
+                <div class="d-flex">
+                    <!-- Brand -->
+                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#">
+                    <h1 class="m-0 text-primary" style="margin-top: 2px;"><span class="text-dark">Kuda</span>Poyti</h1>
+                    </a>
 
-                <ul class="nav">
-                    <li>
-                        <a class="btn btn-secondary" asp-area="admin" asp-controller="Home" asp-action="index">Ism</a>
-                    </li>
+                    <!-- Search form -->
+                    <form class="input-group w-auto my-auto d-none d-sm-flex">
+                        <input autocomplete="off"
+                               type="search"
+                               class="form-control rounded"
+                               placeholder="Search"
+                               style="min-width: 125px;" />
+                        <span class="input-group-text border-0 d-none d-lg-flex">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </form>
+                </div>
+                <!-- Left elements -->
+                <!-- Center elements -->
+                <ul class="navbar-nav flex-row d-none d-md-flex">
+                <template>
+                    <div>
+                        <label for="timepicker-sm">Small time picker</label>
+                        <b-form-timepicker id="timepicker-sm" size="sm" locale="en" class="mb-2"></b-form-timepicker>
+
+                        <label for="timepicker-lg">Large time picker</label>
+                        <b-form-timepicker id="timepicker-lg" size="lg" locale="en"></b-form-timepicker>
+                    </div>
+                </template>
                 </ul>
+                <!-- Center elements -->
+                <!-- Right elements -->
+                <ul class="navbar-nav flex-row">
+                    
+                    <li class="nav-item dropdown me-3 me-lg-1">
+                        <a class="nav-link dropdown-toggle hidden-arrow"
+                           href="#"
+                           id="navbarDropdownMenuLink"
+                           role="button"
+                           data-mdb-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-comments fa-lg"></i>
+
+                            <span class="badge rounded-pill badge-notification bg-danger">6</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3 me-lg-1">
+                        <a class="nav-link dropdown-toggle hidden-arrow"
+                           href="#"
+                           id="navbarDropdownMenuLink"
+                           role="button"
+                           data-mdb-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span class="badge rounded-pill badge-notification bg-danger">12</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item" href="#">Some news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Another news</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+                        <li class="nav-item me-3 me-lg-1">
+                            <a class="nav-link d-sm-flex align-items-sm-center" asp-controller="admin" asp-action="index">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp"
+                                     class="rounded-circle"
+                                     height="22"
+                                     alt="Black and White Portrait of a Man"
+                                     loading="lazy" />
+                                <strong class="d-none d-sm-block ms-1">Admin</strong>
+                            </a>
+                        </li>
+                        <li class="me-lg-2">
+                             <a class="btn btn-outline-secondary btn-rounded bg-success text-center ms-1 " style="border-radius:20px;"><i class="fas fa-place-of-worship"></i> Places</a>
+                        </li>
+                         <li>
+                            <a  class="btn btn-outline-secondary btn-rounded bg-success text-center" asp-controller="Accounts" asp-action="register" style="border-radius:20px;"><i class="fas fa-plus-circle fa-lg"></i> Create Admin</a>
+                         </li>
+                           
+                </ul>
+                <!-- Right elements -->
             </div>
-
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-
+        </nav>
+        <!-- Navbar -->
         <div>
 
             <!-- ============================================================== -->
@@ -71,10 +138,6 @@
         </div>
 
 
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-    </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
 

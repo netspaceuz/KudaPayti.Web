@@ -6,6 +6,7 @@ using kudapoyti.Service.Interfaces;
 using kudapoyti.Service.Interfaces.Common;
 using kudapoyti.Service.Services.Common;
 using kudapoyti.Service.Services.kudapoytiService;
+using kudapoyti.Web.Configuration;
 
 namespace kudapoyti.Web.Configurations.LayerConfigurations
 {
@@ -21,6 +22,10 @@ namespace kudapoyti.Web.Configurations.LayerConfigurations
             services.AddTransient<IPlaceService, PlaceService>();
             services.AddScoped<IPaginationService, PaginatonService>();
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddMemoryCache();
+            services.AddHttpContextAccessor();
+            services.AddAutoMapper(typeof(MappingConfiguration));
         }
 
      

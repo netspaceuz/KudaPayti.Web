@@ -4,6 +4,7 @@ using System.Net;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDataAccess(builder.Configuration);
+
 builder.Services.AddService();
 
 var app = builder.Build();

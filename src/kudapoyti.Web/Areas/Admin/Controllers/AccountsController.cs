@@ -52,6 +52,7 @@ namespace kudapoyti.Web.Areas.Admin.Controllers
 
         }
 
+        [HttpGet]
         public ViewResult Register()
         {
             return View("Register");

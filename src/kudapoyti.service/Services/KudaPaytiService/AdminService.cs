@@ -11,6 +11,7 @@ using kudapoyti.Service.Dtos.AdminAccountDtos;
 using kudapoyti.Service.Interfaces;
 using kudapoyti.Service.Interfaces.Common;
 using kudapoyti.Service.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,17 +50,35 @@ namespace kudapoyti.Service.Services.kudapoytiService
 
         public async Task<IEnumerable<AdminViewModel>> GetAllAysnc(PaginationParams @params)
         {
-            var query = _work.Admins.GetAll().OrderBy(x => x.Id).Select(x => _mapper.Map<AdminViewModel>(x));
-            var result = await _pager.ToPagedAsync(query, @params.PageNumber, @params.PageSize);
-            return result;
+            var query = from product in _work.Admins.GetAll().OrderBy(x => x.Id)
+                        select new AdminViewModel()
+                        {
+                            Id = product.Id,
+                            FullName = product.FullName,
+                            Email = product.Email,
+                            PhoneNumber = product.PhoneNumber,
+                            TelegramLink = product.TelegramLink
+
+                        };
+            return await query.Skip((@params.PageNumber - 1) * @params.PageSize)
+                              .Take(@params.PageSize).AsNoTracking()
+                              .ToListAsync();
         }
         public async Task<AdminViewModel> GetAysnc(long id)
         {
             var get = await _work.Admins.FindByIdAsync(id);
             if (get is not null)
             {
-                var re= _mapper.Map<AdminViewModel>(get);
-                return re;
+                AdminViewModel product = new AdminViewModel()
+                {
+                    Id=get.Id,
+                    FullName = get.FullName,
+                    Email = get.Email,
+                    PhoneNumber = get.PhoneNumber,
+                    TelegramLink =  get.TelegramLink,
+                };
+
+                return product;
             } 
             else throw new NotFoundException(HttpStatusCode.NotFound, "Admin not faund");
         }

@@ -12,8 +12,8 @@ using kudapoyti.DataAccess.DbConstexts;
 namespace kudapoyti.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230129114122_updates")]
-    partial class updates
+    [Migration("20230204122612_Hello")]
+    partial class Hello
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,10 +100,6 @@ namespace kudapoyti.DataAccess.Migrations
 
                     b.Property<long>("PlaceId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("UserEmail")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("UserName")
                         .IsRequired()

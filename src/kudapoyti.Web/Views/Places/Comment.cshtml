@@ -15,10 +15,10 @@
    
     <h2 class="text-uppercase text-center mb-4">Comment</h2>
     <form asp-controller="Places" asp-action="comment"  >
-        <div class="form-outline">
+       @* <div class="form-outline">
             <input type="text" asp-for=PlaceId class="form-control form-control-md" placeholder="ID" />
             <span asp-validation-for="PlaceId" class="text-danger"></span>
-        </div>
+        </div>*@
         <div class="form-outline">
             <input type="text" asp-for=UserName class="form-control form-control-md" placeholder="Enter your fullname" />
             <span asp-validation-for="UserName" class="text-danger"></span>

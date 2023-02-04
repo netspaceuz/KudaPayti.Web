@@ -1,12 +1,16 @@
 ﻿using kudapoyti.DataAccess.Interfaces;
 using kudapoyti.DataAccess.Repositories;
 using kudapoyti.Domain.Entities.Comment;
+using kudapoyti.Domain.Entities.Places;
 using kudapoyti.Service.Common.Exceptions;
+using kudapoyti.Service.Common.Helpers;
 using kudapoyti.Service.Common.Utils;
 using kudapoyti.Service.Dtos.CommentDtos;
 using kudapoyti.Service.Interfaces.CommentServices;
 using kudapoyti.Service.Interfaces.Common;
+using kudapoyti.Service.Services.Common;
 using kudapoyti.Service.ViewModels;
+using System.Diagnostics;
 using System.Net;
 
 namespace kudapoyti.Service.Services.CommentServices
@@ -29,8 +33,6 @@ namespace kudapoyti.Service.Services.CommentServices
             _repository.Comments.CreateAsync(entity);
             var result = await _repository.SaveChangesAsync();
             return result > 0;
-
-
         }
         public async Task<bool> DeleteAsync(long id)
         {

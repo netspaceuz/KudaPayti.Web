@@ -23,7 +23,7 @@ public class PlacesController : Controller
     public async Task<ViewResult> Index(int page = 1)
     {
         var products = await _place.GetAllAsync(new PaginationParams(page, _pageSize));
-        var productsByUrl = (await _place.GetTopPLacesAsync("Party")).ToList();
+        var productsByUrl = (await _place.GetTopPLacesAsync("Park")).ToList();
         var tuple = new Tuple<List<PlaceBaseViewModel>, List<PlaceViewModel>>(products.ToList(), productsByUrl);
         return View("Index", tuple);
     }
@@ -39,7 +39,6 @@ public class PlacesController : Controller
     [HttpGet("comment")]
     public ViewResult Comment()
     {
-
         return View();
     }
 
@@ -49,10 +48,10 @@ public class PlacesController : Controller
         await _commentService.CreateAsync(commentCreateDto);
         if (ModelState.IsValid)
         {
-            var comments = await _commentService.GetByPlaceId(commentCreateDto.PlaceId, new PaginationParams(1, _pageSize));
-            if (comments!=null)
+            var comments = await _commentService.CreateAsync(commentCreateDto);
+            if (comments)
             {
-                return RedirectToAction("get", "places", new { area = "" });
+                return RedirectToAction("index", "places", new { area = "" });
             }
             else
             {

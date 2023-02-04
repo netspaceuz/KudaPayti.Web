@@ -19,6 +19,7 @@ namespace kudapoyti.Service.Dtos.CommentDtos
         {
             return new Comment()
             {
+                PlaceId = dto.PlaceId,
                 UserName=dto.UserName,
                 Comments = dto.Comments,
                 CreatedAt = TimeHelper.GetCurrentServerTime(),

@@ -8,13 +8,10 @@ namespace kudapoyti.Service.Dtos.CommentDtos
     public class CommentCreateDto
     {
         [Required]
-        public string Comments { get; set; }
+        public string Comments { get; set; }=String.Empty;
 
         [Required]
-        public string UserName { get; set; }
-
-        [Required]
-        public string UserEmail { get; set; }
+        public string UserName { get; set; }= String.Empty;
 
         [Required]
         public long PlaceId { get; set; }
@@ -22,7 +19,6 @@ namespace kudapoyti.Service.Dtos.CommentDtos
         {
             return new Comment()
             {
-                UserEmail=dto.UserName,
                 UserName=dto.UserName,
                 Comments = dto.Comments,
                 CreatedAt = TimeHelper.GetCurrentServerTime(),

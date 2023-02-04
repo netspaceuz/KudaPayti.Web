@@ -26,7 +26,6 @@ namespace kudapoyti.Service.Dtos.CommentDtos
                 UserName=dto.UserName,
                 Comments = dto.Comments,
                 CreatedAt = TimeHelper.GetCurrentServerTime(),
-
             };
         }
     }

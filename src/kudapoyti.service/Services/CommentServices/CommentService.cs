@@ -24,7 +24,6 @@ namespace kudapoyti.Service.Services.CommentServices
 
         public async Task<bool> CreateAsync(CommentCreateDto createDto)
         {
-
             var entity = (Comment)createDto;
             _repository.Comments.CreateAsync(entity);
             var result = await _repository.SaveChangesAsync();

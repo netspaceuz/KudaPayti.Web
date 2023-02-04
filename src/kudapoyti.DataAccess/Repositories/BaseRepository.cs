@@ -18,8 +18,6 @@ namespace kudapoyti.DataAccess.Repositories
         }
 
         public void CreateAsync(T entity) => _dbset.Add(entity);
-
-
         public void DeleteAsync(long id)
         {
             var entity = _dbset.Find(id);

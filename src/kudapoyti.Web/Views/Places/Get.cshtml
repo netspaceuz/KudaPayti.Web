@@ -5,7 +5,7 @@
 @{
     Layout = "_GetLayout.cshtml";
 }
-
+<div id="PlaceHolderHere"></div>
 <section class="cinema">
     <div class="container">
         <div class="cinema-content" style="display: flex; column-gap: 10px;">
@@ -43,18 +43,10 @@
                     <font _mstmutation="1" _msttexthash="1386697" _msthash="48">улица Бобура, 174, Шайхантахурский район</font>
                 </div>
                 <h5 class="mt-5"> Зарегистрируйтесь, чтобы написать комментарий!</h5>
-                <form class="col-lg-5 text-center text-lg-left  mb-lg-2" style="padding: 2px 20px; border-radius: 10px">
-                    <div class="form-group" >
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" style="border-radius: 15px">
-                    </div>
-                    
-                </form>
-                <div class="form-outline mb-2">
-                    <textarea class="form-control" id="textAreaExample6" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block mb-3" style="border-radius: 20px">
-                    Send
-                </button>
+                <a   class="btn btn-primary btn-block mb-3" style="border-radius: 20px " data-toggle="ajax-modal"
+                      asp-action="comment" asp-controller="places" >
+                       Comment
+                 </a>
                 <div>
                     <div class="rating-stars">
                         <input type="radio" name="rating" id="rs0" checked><label for="rs0"></label>

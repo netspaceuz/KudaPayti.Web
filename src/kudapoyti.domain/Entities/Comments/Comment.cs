@@ -1,4 +1,5 @@
 ﻿using kudapoyti.Domain.Common;
+using kudapoyti.Domain.Entities.Places;
 
 namespace kudapoyti.Domain.Entities.Comment;
 
@@ -11,5 +12,5 @@ public class Comment : Auditable
     public string UserName { get; set; } = String.Empty;
 
     public long PlaceId { get; set; }
-    public virtual Places.Place Place { get; set; } = null!;
+    public virtual Place Place { get; set; } = null!;
 }

@@ -1,0 +1,42 @@
+﻿@using kudapoyti.Service.Dtos.CommentDtos
+@model CommentCreateDto
+@{
+    Layout = "_GetLayout.cshtml";
+}
+<style>
+
+    .wrppr {
+        padding: 10px 50px 20px;
+        border-radius: 50px;
+        background-color: rgba(240, 255, 255, .5);
+    }
+</style>
+<div class="wrppr">
+   
+    <h2 class="text-uppercase text-center mb-4">Comment</h2>
+    <form asp-controller="Places" asp-action="comment"  >
+        <div class="form-outline">
+            <input type="text" asp-for=PlaceId class="form-control form-control-md" placeholder="Enter your fullname" />
+            <span asp-validation-for="PlaceId" class="text-danger"></span>
+        </div>
+        <div class="form-outline">
+            <input type="text" asp-for=UserEmail class="form-control form-control-md" placeholder="Enter your fullname" />
+            <span asp-validation-for="UserEmail" class="text-danger"></span>
+        </div>
+        <div class="form-outline">
+            <input type="text" asp-for=UserName class="form-control form-control-md" placeholder="Enter your fullname" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-outline mb-2" >
+            <textarea class="form-control text-dark" asp-for="Comments" id="textAreaExample6" rows="3" placeholder="comment" ></textarea>
+            <span asp-validation-for="Comments" class="text-danger"></span>
+        </div>
+        <div class="mt-3">
+            <input type="submit" class="btn btn-success" style="width:100%;" value="Create" />
+        </div>
+        <a asp-action="get" asp-controller="places" class="btn btn-primary btn-block mb-3" style="border-radius: 20px">
+            Send
+        </a>
+
+    </form>
+</div>

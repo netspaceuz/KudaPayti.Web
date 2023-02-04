@@ -10604,6 +10604,9 @@ h6,
 
 
 
+
+
+
 .rating-stars {
     display: block;
     width: 50vmin;
@@ -10669,6 +10672,22 @@ label {
         background-position: 0 0;
     }
 
+    label:hover:before {
+        transition: all 0.25s ease 0s;
+    }
+
+input:checked + label ~ label:before {
+    background-position: 100% 0;
+    transition: all 0.25s ease 0s;
+}
+
+input:checked + label ~ label:hover:before {
+    background-position: 0% 0
+}
+
+
+
+
 
 #rs1:checked ~ .rating-counter:before {
     content: "1";
@@ -10690,7 +10709,20 @@ label {
     content: "5";
 }
 
+label + input:checked ~ .rating-counter:before {
+    color: #ffab00 !important;
+    transition: all 0.25s ease 0s;
+}
 
+
+
+
+
+label:hover ~ .rating-counter:before {
+    color: #9aacc6 !important;
+    transition: all 0.5s ease 0s;
+    animation: pulse 1s ease 0s infinite;
+}
 
 @keyframes pulse {
     50% {
@@ -10723,11 +10755,4 @@ input:checked:hover ~ .rating-counter:before {
     animation: none !important;
     color: #ffab00 !important;
 }
-
-
-
-
-
-
-
 

@@ -9,17 +9,24 @@ namespace kudapoyti.Service.Dtos.CommentDtos
     {
         [Required]
         public string Comments { get; set; }
+
         [Required]
-        public int PlaceId { get; set; }
+        public string UserName { get; set; }
+
+        [Required]
+        public string UserEmail { get; set; }
+
+        [Required]
+        public long PlaceId { get; set; }
         public static implicit operator Comment(CommentCreateDto dto)
         {
             return new Comment()
             {
+                UserEmail=dto.UserName,
+                UserName=dto.UserName,
                 Comments = dto.Comments,
-                PlaceId = dto.PlaceId,
                 CreatedAt = TimeHelper.GetCurrentServerTime(),
-                UserEmail = TokenService.GetValue(CurrenUser.Token, "emailaddress"),
-                UserName = TokenService.GetValue(CurrenUser.Token, "name")
+
             };
         }
     }

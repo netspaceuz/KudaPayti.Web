@@ -36,13 +36,31 @@ public class PlacesController : Controller
         var tuple = new Tuple<PlaceViewModel, List<PlaceViewModel>>(place, placetype.ToList());
         return View(tuple);
     }
+    [HttpGet("comment")]
+    public ViewResult Comment()
+    {
 
-    [HttpPost]
+        return View();
+    }
+
+    [HttpPost("comment")]
     public async Task<IActionResult> CreateCommentAsync(CommentCreateDto commentCreateDto)
     {
         await _commentService.CreateAsync(commentCreateDto);
-        var comments = await _commentService.GetByPlaceId(commentCreateDto.PlaceId, new PaginationParams(1, _pageSize));
-        return View();
+        if (ModelState.IsValid)
+        {
+            var comments = await _commentService.GetByPlaceId(commentCreateDto.PlaceId, new PaginationParams(1, _pageSize));
+            if (comments!=null)
+            {
+                return RedirectToAction("get", "places", new { area = "" });
+            }
+            else
+            {
+                return Comment();
+            }
+        }
+        else return Comment();
+
     }
 
 }

@@ -33,14 +33,17 @@ namespace kudapoyti.DataAccess.Repositories
             Places = new PlaceRepository(_dbContext);
         }
 
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _dbContext.SaveChangesAsync();
-        }
+       
 
         public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
         {
             return _dbContext.Entry(entity);
         }
+
+        public async  Task<int> SaveChangesAsync()
+        {
+            return  await _dbContext.SaveChangesAsync();
+        }
     }
 }
+

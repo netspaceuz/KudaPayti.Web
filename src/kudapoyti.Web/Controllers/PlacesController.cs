@@ -36,16 +36,18 @@ public class PlacesController : Controller
         var tuple = new Tuple<PlaceViewModel, List<PlaceViewModel>>(place, placetype.ToList());
         return View(tuple);
     }
+
     [HttpGet("comment")]
-    public ViewResult Comment()
+    public async Task<ViewResult> Comment(long PlaceId,CommentCreateDto commentCreateDto)
     {
-        return View();
+        commentCreateDto.PlaceId = PlaceId;
+        return View("Comment",commentCreateDto);
     }
 
     [HttpPost("comment")]
-    public async Task<IActionResult> CreateCommentAsync(CommentCreateDto commentCreateDto)
+    public async Task<IActionResult> CreateCommentAsync( CommentCreateDto commentCreateDto)
     {
-        await _commentService.CreateAsync(commentCreateDto);
+        
         if (ModelState.IsValid)
         {
             var comments = await _commentService.CreateAsync(commentCreateDto);
@@ -53,13 +55,11 @@ public class PlacesController : Controller
             {
                 return RedirectToAction("index", "places", new { area = "" });
             }
-            else
-            {
-                return Comment();
-            }
-        }
-        else return Comment();
+            else return RedirectToAction("comment", "places", new { area = "" });
 
+        }
+        else return RedirectToAction("comment", "places", new { area = "" });
+            
     }
 
 }

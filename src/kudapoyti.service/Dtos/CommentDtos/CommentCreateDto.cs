@@ -8,6 +8,7 @@ namespace kudapoyti.Service.Dtos.CommentDtos
     public class CommentCreateDto
     {
         [Required]
+        [StringLength(50, MinimumLength = 1)]
         public string Comments { get; set; }=String.Empty;
 
         [Required]

@@ -1,0 +1,45 @@
+﻿@using kudapoyti.Service.Dtos
+@model PlaceCreateDto
+
+
+ 
+<div class="d-flex justify-content-center" style="margin-top:50px">
+
+    <div class="card px-4 pt-4 " style="width:500px;  border-radius: 50px">
+        <div class="card-body">
+            <h4 >Create Add Product</h4>
+            <form class="text-black-50" asp-area="admin" asp-action="create" asp-controller="place" method="post" enctype="multipart/form-data">
+                <div class="mt-3">
+                    <input type="text" asp-for=Title class="form-control form-control-solid text-dark" placeholder="Title" style="border-radius:10px;">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mt-4">
+                    <input type="text" asp-for=Description class="form-control form-control-solid text-dark" placeholder="Description" style="border-radius:10px;>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="mt-4">
+                    <input type="text" asp-for=Type class="form-control text-dark" placeholder="Type" style="border-radius:10px;>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="mt-4">
+                    <input type="text" asp-for=Region class="form-control text-dark" placeholder="Region" style="border-radius:10px;>
+                    <span asp-validation-for="Region" class="text-danger"></span>
+                </div>
+                <div class="mt-4">
+                    <input type="text" asp-for=LocationLink class="form-control text-dark" placeholder="LocationLink" style="border-radius:10px;>
+                    <span asp-validation-for="LocationLink" class="text-danger"></span>
+                </div>
+                <div class="mt-4">
+                    <input type="file" asp-for=Image class="form-control text-dark" placeholder="Image" style="border-radius:10px;>
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="mt-4 mb-2 d-flex justify-content-end" style="border-radius:10px;">
+                    <input type="submit" class="btn btn-success me-2" value="Create">
+                    <a asp-area="admin" asp-controller="place" asp-action="index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

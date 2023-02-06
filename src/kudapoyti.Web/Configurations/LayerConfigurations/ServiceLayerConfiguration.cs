@@ -21,7 +21,7 @@ namespace kudapoyti.Web.Configurations.LayerConfigurations
             services.AddScoped<IAuthManager, AUthManager>();
             services.AddScoped<IAdminAccountService, AdminAccountService>();
             services.AddTransient<IPlaceService, PlaceService>();
-            services.AddScoped<IPaginationService, PaginatonService>();
+            services.AddTransient<IPaginationService,PaginatonService>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<ICommentService, CommentService>();

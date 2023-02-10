@@ -1,6 +1,5 @@
 ﻿@using kudapoyti.Service.Common.Utils
-@using kudapoyti.Service.ViewModels
-@model Tuple<List<PlaceBaseViewModel>,List<PlaceViewModel>>
+@model PagedList<PlaceBaseViewModel>
 
 <div  >
     <div class="container-fluid booking mt-5 pb-5" style="border-radius:10px;">
@@ -14,7 +13,7 @@
                                     <select class="custom-control-inline px-4" style="height: 47px; border-radius:10px">
                                         <option selected>Regions </option>
                                         @{
-                                            foreach (var region in Model.Item1)
+                                            foreach (var region in Model)
                                             {
                                                     <option value="1  ">@region.Region</option>
                                             }
@@ -27,7 +26,7 @@
                                     <select class="custom-control px-4" style="height: 47px; border-radius:10px">
                                         <option selected value="Submit" >Category </option>
                                         @{
-                                            foreach(var category in Model.Item1)
+                                            foreach(var category in Model)
                                             {
                                                         <option value="1">@category.PlaceSiteUrl</option>
 
@@ -61,7 +60,7 @@
         </div>
     <div class="row g-5">
     @{
-        foreach(var place in Model.Item1)
+        foreach(var place in Model)
         {
             <div class="col-lg-4 h-300">
                 <div class="mt-5 md-5 me-5">
@@ -80,14 +79,68 @@
             </div>
         }
     }
+        <div class="mb-50 mt-50">
+           
+                <ul class="pagination">
+                    @{
+                        
+                        if(Model.MetaData.HasPrevious)
+                        {
+                             <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <sp >&laquo;</sp>
+                                </a>
+                             </li>
+                        }
+                        else
+                        {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span>&laquo;</span>
+                            </a>
+                        </li>
+                        }
+                        for (int _page = 1 ; _page <= Model.MetaData.TotalPages; _page++)
+                        {
+                            if(_page == Model.MetaData.CurrentPage)
+                            {
+                                <li class="page-item active"><a class="page-link" href="#">@_page</a></li>
+                            }
+                            else
+                            {
+                                 <li class="page-item"><a class="page-link" href="#">@_page</a></li>
+                            }
+                            
+                        }
+                        if(Model.MetaData.HasNext)
+                        {
+                             <li class="page-item">
+                                 <a class="page-link" href="#" aria-label="Next">
+                                     <span >&raquo;</span>
+                                 </a>
+                             </li>
+                        }
+                        else
+                        {
+                             <li class="page-item disabled">
+                                 <a class="page-link" href="#" aria-label="Next">
+                                     <span >&raquo;</span>
+                                 </a>
+                             </li>
+                        }
+                    }
+                </ul>
+        </div>
+       
     </div>
     
+       
     <div class="text-center mb-5 mt-5">
         <h2 class="text-primary text-uppercase">TOP</h2>
     </div>
     <div class="row g-5">
         @{
-            foreach(var place in Model.Item2)
+            foreach(var place in Model)
             {
                 if (place.PlaceSiteUrl == "Концерт")
                 {   

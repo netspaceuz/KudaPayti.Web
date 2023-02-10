@@ -21,12 +21,4 @@
     <ProjectReference Include="..\kudapoyti.service\kudapoyti.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Administrator\Data\" />
-    <Folder Include="Areas\Administrator\Models\" />
-    <Folder Include="Areas\Administrator\Views\Accounts\" />
-    <Folder Include="Areas\Administrator\Views\Home\" />
-    <Folder Include="Areas\Administrator\Views\Places\" />
-  </ItemGroup>
-
 </Project>

@@ -40,7 +40,7 @@ namespace kudapoyti.Service.Services.kudapoytiService
             else throw new NotFoundException(HttpStatusCode.NotFound, "Admin not found");
         }
 
-        public async Task<IEnumerable<AdminViewModel>> GetAllAysnc(PaginationParams @params)
+        public async Task<PagedList<AdminViewModel>> GetAllAysnc(PaginationParams @params)
         {
             var query = from product in _work.Admins.GetAll().OrderBy(x => x.Id)
                         select new AdminViewModel()
@@ -52,9 +52,7 @@ namespace kudapoyti.Service.Services.kudapoytiService
                             TelegramLink = product.TelegramLink
 
                         };
-            return await query.Skip((@params.PageNumber - 1) * @params.PageSize)
-                              .Take(@params.PageSize).AsNoTracking()
-                              .ToListAsync();
+            return await PagedList<AdminViewModel>.ToPagedListAsync(query, @params);
         }
         public async Task<AdminViewModel> GetAysnc(long id)
         {

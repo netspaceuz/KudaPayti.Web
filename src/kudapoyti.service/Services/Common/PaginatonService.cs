@@ -16,8 +16,8 @@ namespace kudapoyti.Service.Services.Common
 
         public async Task<IList<T>> ToPagedAsync<T>(IQueryable<T> items, int pageNumber, int pageSize)
         {
-            int totalItems = await items.CountAsync();
-            PaginationMetaData paginationMetaData = new PaginationMetaData()
+            int totalItems = items.Count();
+            PaginationMetaData paginationMetaData = new PaginationMetaData(pageNumber, pageSize, totalItems)
             {
                 CurrentPage = pageNumber,
                 PageSize = pageSize,
@@ -26,6 +26,7 @@ namespace kudapoyti.Service.Services.Common
                 HasPrevious = pageNumber > 1
             };
             paginationMetaData.HasNext = paginationMetaData.CurrentPage < paginationMetaData.TotalPages;
+
 
             string json = JsonConvert.SerializeObject(paginationMetaData);
             _accessor.HttpContext!.Response.Headers.Add("X-Pagination", json);

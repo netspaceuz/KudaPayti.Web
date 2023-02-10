@@ -143,9 +143,9 @@ public class PlaceService : IPlaceService
             .Select(x => x.PlaceSiteUrl).ToListAsync();
     }
 
-    public async Task<IEnumerable<PlaceBaseViewModel>> GetAllAsync(PaginationParams @params)
+    public async Task<PagedList<PlaceBaseViewModel>> GetAllAsync(PaginationParams @params)
     {
-        var query = from product in _repository.Places.GetAll().OrderByDescending(x => x.CreatedAt)
+        var query = from product in _repository.Places.GetAll().OrderBy(x => x.CreatedAt)
                     select new PlaceBaseViewModel()
                     {
                         Id = product.Id,
@@ -158,9 +158,7 @@ public class PlaceService : IPlaceService
                         rankedUsersCount = product.rankedUsersCount,
                         CreatedAt=product.CreatedAt
                     };
-        return await query.Skip((@params.PageNumber - 1) * @params.PageSize)
-                          .Take(@params.PageSize).AsNoTracking()
-                          .ToListAsync();
+        return await PagedList<PlaceBaseViewModel>.ToPagedListAsync(query, @params);
     }
 
 }

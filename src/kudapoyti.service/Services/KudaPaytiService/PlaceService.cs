@@ -145,7 +145,7 @@ public class PlaceService : IPlaceService
 
     public async Task<PagedList<PlaceBaseViewModel>> GetAllAsync(PaginationParams @params)
     {
-        var query = from product in _repository.Places.GetAll().OrderBy(x => x.CreatedAt)
+        var query = from product in _repository.Places.GetAll().OrderByDescending(x => x.CreatedAt)
                     select new PlaceBaseViewModel()
                     {
                         Id = product.Id,

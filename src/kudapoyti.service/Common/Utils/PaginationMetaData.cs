@@ -9,7 +9,7 @@ public class PaginationMetaData
     public int PageSize { get;  set; }
     public int TotalItems { get; set; }
 
-    public PaginationMetaData(int pageIndex, int totalCount, int pageSize)
+    public PaginationMetaData(int pageIndex, int pageSize, int totalCount)
     {
         CurrentPage =(int)pageIndex;
         TotalPages =(int)Math.Ceiling((double)(totalCount + pageSize-1) / pageSize);

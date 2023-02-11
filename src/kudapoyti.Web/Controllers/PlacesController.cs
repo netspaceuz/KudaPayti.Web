@@ -15,7 +15,7 @@ public class PlacesController : Controller
     private readonly IPlaceService _place;
     private readonly ICommentService _commentService;
     
-    private readonly int _pageSize = 1;
+    private readonly int _pageSize = 3;
     public PlacesController(IPlaceService place, ICommentService commentService)
     {
         this._place = place;
@@ -28,11 +28,11 @@ public class PlacesController : Controller
         return View("Index", products);
     }
     [HttpGet("{placeId}")]
-    public async Task<ViewResult> GetAsync(long placeId)
+    public async Task<ViewResult> GetAsync(long placeId, int page=1)
     {
         var place = await _place.GetAsync(placeId);
-        var placetype = await _place.GetByTypeAsync(new PaginationParams(1, 3), place.PlaceSiteUrl);
-        var tuple = new Tuple<PlaceViewModel, List<PlaceViewModel>>(place, placetype.ToList());
+        var placetype = await _place.GetByTypeAsync(new PaginationParams(page,_pageSize), place.PlaceSiteUrl);
+        var tuple = new Tuple<PlaceViewModel, PagedList<PlaceViewModel>>(place, placetype);
         return View(tuple);
     }
 

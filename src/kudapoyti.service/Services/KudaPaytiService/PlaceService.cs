@@ -131,11 +131,12 @@ public class PlaceService : IPlaceService
                .Take(10).Select(x => (PlaceViewModel)x).AsNoTracking().ToListAsync();
     }
 
-    public async Task<IEnumerable<PlaceViewModel>> GetByTypeAsync(PaginationParams @paginationParams, string type)
+    public async Task<PagedList<PlaceViewModel>> GetByTypeAsync(PaginationParams @params, string type)
     {
         var query = _repository.Places.GetAll().Where(x => x.PlaceSiteUrl == $"{type}").Select(x => (PlaceViewModel)x);
-        return await _paginator.ToPagedAsync(query, @paginationParams.PageNumber, @paginationParams.PageSize);
+        return await PagedList<PlaceViewModel>.ToPagedListAsync(query, @params);
     }
+
     public async Task<IEnumerable<string>> GetOtherTypes()
     {
         var alreadyHavetypes = new List<string> { "Отели", "Развлечения", "Рестораны", "Рассказы о путешествиях", "Авиабилеты" };

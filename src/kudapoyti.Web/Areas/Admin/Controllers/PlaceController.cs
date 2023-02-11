@@ -10,7 +10,7 @@ namespace kudapoyti.Web.Areas.Admin.Controllers
     public class PlaceController : Controller
     {
         private readonly IPlaceService _place;
-        private readonly int _pageSize = 10;
+        private readonly int _pageSize = 5;
         public PlaceController(IPlaceService place)
         {
             this._place = place;

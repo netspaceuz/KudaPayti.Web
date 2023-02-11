@@ -1,10 +1,11 @@
-﻿@using kudapoyti.Service.ViewModels
-@model Tuple<PlaceViewModel, List<PlaceViewModel>>
-
+﻿@using kudapoyti.Service.Common.Utils
+@using kudapoyti.Service.ViewModels
+@model Tuple<PlaceViewModel, PagedList<PlaceViewModel>>
 
 @{
     Layout = "_GetLayout.cshtml";
 }
+
 <div id="PlaceHolderHere"></div>
 <section class="cinema">
     <div class="container">
@@ -25,28 +26,28 @@
                         <font class="col-lg-6 text-center text-lg-right">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" /> 
-                             </svg>
-                             @Model.Item1.rank
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                            </svg>
+                            @Model.Item1.rank
                         </font>
                     </dib>
                 </div>
                 <h5 class="text-dark mt-2"><span class="text-primary">Description:  </span>@Model.Item1.Description</h5>
-               
+
                 <a class="m-0" href="@Model.Item1.Location_link">
                     <i class="fa fa-map-marker-alt text-primary mr-2"></i>
                     <font _mstmutation="1" _msttexthash="1386697" _msthash="48">@Model.Item1.Region</font>
                 </a>
-                
+
                 <div class="m-0">
-                    
+
                     <font _mstmutation="1" _msttexthash="1386697" _msthash="48">улица Бобура, 174, Шайхантахурский район</font>
                 </div>
                 <h5 class="mt-5"> написать комментарий!</h5>
-                <a   class="btn btn-primary btn-block mb-3" style="border-radius: 20px " data-toggle="ajax-modal"
-                      asp-action="comment" asp-controller="places" asp-route-PlaceId="@Model.Item1.Id" >
-                       Create
-                 </a>
+                <a class="btn btn-primary btn-block mb-3" style="border-radius: 20px " data-toggle="ajax-modal"
+                   asp-action="comment" asp-controller="places" asp-route-PlaceId="@Model.Item1.Id">
+                    Create
+                </a>
                 <div>
                     <div class="rating-stars">
                         <input type="radio" name="rating" id="rs0" checked><label for="rs0"></label>
@@ -58,31 +59,72 @@
                         <span class="rating-counter"></span>
                     </div>
                 </div>
-               
-
-
             </div>
+
             <ul class="cinema-content__recommend-list" style="flex-grow: 1; list-style: none; padding-top: 70px; padding-left: 0;">
                 @{
                     foreach (var type in Model.Item2)
                     {
                         if (type.Id != Model.Item1.Id)
                         {
-                            <a asp-controller="places" asp-action="get" asp-route-placeId="@type.Id">
+                                <a asp-controller="places" asp-action="get" asp-route-placeId="@type.Id">
                                 <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
                                     <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
                                     <div class="destination-overlay text-white text-decoration-none text-center" href="">
                                         <h5 class="text-white">@type.Title</h5>
                                     </div>
                                 </li>
-                            </a>
+                                </a>
                         }
-                   }
-               }
-           </ul>
+                    }
+                }
+
+                @{
+                    if (@Model.Item2.MetaData.HasPrevious)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item2.MetaData.CurrentPage-1)" aria-label="Previous">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 15 15">
+                                    <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                </svg>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" style="border-radius:15px;" aria-label="Previous">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 15 15">
+                                    <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                </svg>
+                            </a>
+                        </li>
+                    }
+                    if (Model.Item2.MetaData.HasNext)
+                    {
+                            <li class="page-item">
+                                <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item2.MetaData.CurrentPage + 1)" aria-label="Next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </a>
+                            </li>
+                    }
+                    else
+                    {
+                            <li class="page-item disabled">
+                                <a class="page-link" style="border-radius:15px;" href="#" aria-label="Next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </a>
+                            </li>
+                    }
+                }
+            </ul>
         </div>
     </div>
-</section>   
+</section>
 
 
 

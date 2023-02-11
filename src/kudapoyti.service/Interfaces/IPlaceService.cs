@@ -15,7 +15,7 @@ namespace kudapoyti.Service.Interfaces
         public Task<bool> CreateAsync(PlaceCreateDto createDto);
         public Task<bool> AddRankPoint(long placeId, int rank);
         public Task<IEnumerable<PlaceViewModel>> GetTopPLacesAsync(string placeUrl);
-        public Task<IEnumerable<PlaceViewModel>> GetByTypeAsync(PaginationParams @paginationParams, string type);
+        public Task<PagedList<PlaceViewModel>> GetByTypeAsync(PaginationParams @paginationParams, string type);
         public Task<IEnumerable<string>> GetOtherTypes();
 
     }

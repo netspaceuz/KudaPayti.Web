@@ -9,7 +9,7 @@ namespace kudapoyti.Web.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly IAdminService _place;
-        private readonly int _pageSize = 10;
+        private readonly int _pageSize = 5;
 
 
         public AdminController(IAdminService place)

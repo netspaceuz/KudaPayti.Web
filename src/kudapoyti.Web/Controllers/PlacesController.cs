@@ -6,7 +6,6 @@ using kudapoyti.Service.Services.CommentServices;
 using kudapoyti.Service.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace kudapoyti.Web.Controllers;
 
 [Route("places")]
@@ -25,14 +24,18 @@ public class PlacesController : Controller
     public async Task<ViewResult> Index(int page = 1)
     {
         var products = await _place.GetAllAsync(new PaginationParams(page, _pageSize));
-        return View("Index", products);
+        var places = await _place.GetTopPLacesAsync(new PaginationParams(page, _pageSize));
+        var tuple=new Tuple<PagedList<PlaceBaseViewModel>,PagedList<PlaceViewModel>>(products, places);
+        return View("Index", tuple);
     }
     [HttpGet("{placeId}")]
-    public async Task<ViewResult> GetAsync(long placeId, int page=1)
+    public async Task<ViewResult> GetAsync(long placeId, CommentCreateDto commentDto, int page=1)
     {
         var place = await _place.GetAsync(placeId);
+        commentDto.PlaceId=placeId;
         var placetype = await _place.GetByTypeAsync(new PaginationParams(page,_pageSize), place.PlaceSiteUrl);
-        var tuple = new Tuple<PlaceViewModel, PagedList<PlaceViewModel>>(place, placetype);
+        var get = await _commentService.GetByPlaceId(commentDto.PlaceId, new PaginationParams(page, _pageSize));
+        var tuple = new Tuple<PlaceViewModel, PagedList<PlaceViewModel>,PagedList<CommentsViewModel>>(place, placetype,get);
         return View(tuple);
     }
 
@@ -40,13 +43,13 @@ public class PlacesController : Controller
     public async Task<ViewResult> Comment(long PlaceId,CommentCreateDto commentCreateDto)
     {
         commentCreateDto.PlaceId = PlaceId;
-        return View("Comment",commentCreateDto);
+        return View("comment", commentCreateDto);
     }
 
-    [HttpPost("comment")]
-    public async Task<IActionResult> CreateCommentAsync( CommentCreateDto commentCreateDto)
-    {
-        
+
+    [HttpPost("create")]
+    public async Task<IActionResult> CreateCommentAsync(CommentCreateDto commentCreateDto)
+         {
         if (ModelState.IsValid)
         {
             var comments = await _commentService.CreateAsync(commentCreateDto);
@@ -57,8 +60,7 @@ public class PlacesController : Controller
             else return RedirectToAction("comment", "places", new { area = "" });
 
         }
-        else return RedirectToAction("comment", "places", new { area = "" });
-            
+        else return RedirectToAction("comment", "places", new { area = "" });       
     }
     [HttpGet("region")]
     public async Task<ViewResult> GetRegion(string SityName)

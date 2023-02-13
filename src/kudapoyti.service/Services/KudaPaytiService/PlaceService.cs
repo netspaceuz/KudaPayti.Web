@@ -121,14 +121,22 @@ public class PlaceService : IPlaceService
         return result > 0;
     }
 
-    public async Task<IEnumerable<PlaceViewModel>> GetTopPLacesAsync(string placeUrl)
+    public async Task<PagedList<PlaceViewModel>> GetTopPLacesAsync(PaginationParams @params)
     {
-        if(placeUrl is not null)
-            return await _repository.Places.GetAll().Where(x => x.PlaceSiteUrl == placeUrl).OrderByDescending(x => x)
-                   .Take(10).Select(x => (PlaceViewModel)x).AsNoTracking().ToListAsync();
-
-        return await _repository.Places.GetAll().OrderByDescending(x => x)
-               .Take(10).Select(x => (PlaceViewModel)x).AsNoTracking().ToListAsync();
+        var query = from product in _repository.Places.GetAll().OrderBy(x => x.CreatedAt)
+                    select new PlaceViewModel()
+                    {
+                        Id = product.Id,
+                        ImageUrl = product.ImageUrl,
+                        Title = product.Title,
+                        Region = product.Region,
+                        rank = product.rank,
+                        Description = product.Description,
+                        PlaceSiteUrl = product.PlaceSiteUrl,
+                        rankedUsersCount = product.rankedUsersCount,
+                        CreatedAt = product.CreatedAt
+                    };
+        return await PagedList<PlaceViewModel>.ToPagedListAsync(query, @params);
     }
 
     public async Task<PagedList<PlaceViewModel>> GetByTypeAsync(PaginationParams @params, string type)

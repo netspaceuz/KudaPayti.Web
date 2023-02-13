@@ -28,7 +28,6 @@ namespace kudapoyti.Service.Services.CommentServices
 
         public async Task<bool> CreateAsync(CommentCreateDto createDto)
         {
-
             var entity = (Comment)createDto;
             _repository.Comments.CreateAsync(entity);
             var result = await _repository.SaveChangesAsync();
@@ -46,10 +45,10 @@ namespace kudapoyti.Service.Services.CommentServices
             else throw new NotFoundException(HttpStatusCode.NotFound, "Comment is not found.");
         }
 
-        public async Task<IEnumerable<CommentsViewModel>> GetByPlaceId(long id, PaginationParams @paginationParams)
+        public async Task<PagedList<CommentsViewModel>> GetByPlaceId(long id, PaginationParams @params)
         {
             var query = _repository.Comments.GetAll().Where(x => x.PlaceId == id).Select(x => (CommentsViewModel)x);
-            var data = await _paginator.ToPagedAsync(query, @paginationParams.PageNumber, @paginationParams.PageSize);
+            var data = await PagedList<CommentsViewModel>.ToPagedListAsync(query, @params);
             return data;
         }
     }

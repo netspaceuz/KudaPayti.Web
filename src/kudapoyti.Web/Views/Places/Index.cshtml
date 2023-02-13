@@ -1,9 +1,9 @@
 ﻿@using kudapoyti.Service.Common.Utils
-@model PagedList<PlaceBaseViewModel>
-
-<div  >
+@model Tuple<PagedList<PlaceBaseViewModel>,PagedList<PlaceViewModel>>
+<link href="~/css/mens.css" rel="stylesheet">
+<div>
     <div class="container-fluid booking mt-5 pb-5" style="border-radius:10px;">
-        <div class="container pb-5" >
+        <div class="container pb-5">
             <div class="bg-light shadow" style="padding: 20px;border-radius:10px;">
                 <div class="row align-items-center mx-5" style="min-height: 50px;">
                     <div class="col-md-10" style="column-gap: 10px;">
@@ -13,9 +13,9 @@
                                     <select class="custom-control-inline px-4" style="height: 47px; border-radius:10px">
                                         <option selected>Regions </option>
                                         @{
-                                            foreach (var region in Model)
+                                            foreach (var region in Model.Item1)
                                             {
-                                                    <option value="1  ">@region.Region</option>
+                                                        <option value="1  ">@region.Region</option>
                                             }
                                         }
                                     </select>
@@ -24,9 +24,9 @@
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
                                     <select class="custom-control px-4" style="height: 47px; border-radius:10px">
-                                        <option selected value="Submit" >Category </option>
+                                        <option selected value="Submit">Category </option>
                                         @{
-                                            foreach(var category in Model)
+                                            foreach (var category in Model.Item1)
                                             {
                                                         <option value="1">@category.PlaceSiteUrl</option>
 
@@ -48,190 +48,195 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        
-                            <a class="btn btn-primary btn-block text-center" type="text" style="height: 47px;  border-radius: 12px;" asp-action="region" asp-controller="places" asp-route-region="Regions">Submit</a>
+
+                        <a class="btn btn-primary btn-block text-center" type="text" style="height: 47px;  border-radius: 12px;" asp-action="region" asp-controller="places" asp-route-region="Regions">Submit</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <div class="text-center mb-50 mt-50">
-            <h2 class="text-primary text-uppercase">Recommended</h2>
-        </div>
+    <div class="text-center mb-50 mt-50">
+        <h2 class="text-primary text-uppercase">Recommended</h2>
+    </div>
     <div class="row g-5">
-    @{
-        foreach(var place in Model)
-        {
-            <div class="col-lg-4 h-300">
-                <div class="mt-5 md-5 me-5">
-                    <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
-                        <div class="destination-item position-relative overflow-hidden mb-2 ">
+        @{
+            foreach (var place in Model.Item1)
+            {
+                        <div class="col-lg-4 h-300">
+                            <div class="mt-5 md-5 me-5">
+                                <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
+                                    <div class="destination-item position-relative overflow-hidden mb-2 ">
 
-                            <img class="img-fluid" src="@place.ImageUrl">
+                                        <img class="img-fluid" src="@place.ImageUrl">
 
-                            <div class="destination-overlay text-white text-decoration-none text-center" href="">
-                                <h4 class="text-white">@place.Title</h4>
-                                <span>@place.Region</span>
+                                        <div class="destination-overlay text-white text-decoration-none text-center" href="">
+                                            <h4 class="text-white">@place.Title</h4>
+                                            <span>@place.Region</span>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </a>
-                </div>
-            </div>
+            }
         }
-    }
     </div>
-    <div class="mb-50 mt-50">
+   
+    <div >
 
-         @{
-             if (Model.MetaData.TotalPages > 1 && Model.MetaData.CurrentPage <= Model.MetaData.TotalPages)
-             {
-                 <ul class="pagination pagination-outline">
-                     @{
-                         if (@Model.MetaData.HasPrevious)
-                         {
-                                 <li class="page-item">
-                                     <a class="page-link" asp-controller="places" asp-action="index" asp-route-page="@(Model.MetaData.CurrentPage-1)" aria-label="Previous">
-                                         <sp>&laquo;</sp>
-                                     </a>
-                                 </li>
-                         }
-                         else
-                         {
-                                 <li class="page-item disabled">
-                                     <a class="page-link" href="#" aria-label="Previous">
-                                         <span>&laquo;</span>
-                                     </a>
-                                 </li>
-                         }
-                         if (Model.MetaData.TotalPages > 12)
-                         {
-                             if (Model.MetaData.CurrentPage == 1)
-                             {
-                                 <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="1" class="page-link">1</a></li>
-                             }
-                             else
-                             {
-                                     <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="1" class="page-link">1</a></li>
-                             }
-                             if (Model.MetaData.CurrentPage == 2)
-                             {
-                                     <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="2" class="page-link">2</a></li>
-                             }
-                             else
-                             {
-                                     <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="2" class="page-link">2</a></li>
-                             }
-                             if (Model.MetaData.CurrentPage < 8)
-                             {
-                                 for (int _page = 3; _page <= 10; _page++)
-                                 {
+        @{
+            if (Model.Item1.MetaData.TotalPages > 1 && Model.Item1.MetaData.CurrentPage <= Model.Item1.MetaData.TotalPages)
+            {
+                        <nav class="pagination-outer w-100 h-100" aria-label="Page navigation">
 
-                                     if (_page == Model.MetaData.CurrentPage)
-                                     {
-                                             <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                     else
-                                     {
-                                             <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                 }
-                                 <li class="page-item disabled"><a class="page-link">...</a></li>
-                             }
-                             else if (Model.MetaData.CurrentPage >= 8 && Model.MetaData.CurrentPage < Model.MetaData.TotalPages - 7)
-                             {
-                                 <li class="page-item disabled"><a class="page-link">...</a></li>
-                                 for (int _page = Model.MetaData.CurrentPage - 3; _page <= Model.MetaData.CurrentPage + 3; _page++)
-                                 {
-                                     if (_page == Model.MetaData.CurrentPage)
-                                     {
-                                             <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                     else
-                                     {
-                                             <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                 }
-                                 <li class="page-item disabled"><a class="page-link">...</a></li>
-                             }
-                             else if (Model.MetaData.CurrentPage >= Model.MetaData.TotalPages - 7)
-                             {
-                                 <li class="page-item disabled"><a class="page-link">...</a></li>
-                                 for (int _page = Model.MetaData.TotalPages - 9; _page <= Model.MetaData.TotalPages - 2; _page++)
-                                 {
-                                     if (_page == Model.MetaData.CurrentPage)
-                                     {
-                                             <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                     else
-                                     {
-                                             <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                     }
-                                 }
-                             }
-                             if (Model.MetaData.TotalPages - 1 == Model.MetaData.CurrentPage)
-                             {
-                                     <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@(Model.MetaData.TotalPages - 1)" class="page-link">@(Model.MetaData.TotalPages - 1)</a></li>
-                             }
-                             else
-                             {
-                                     <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@(Model.MetaData.TotalPages - 1)" class="page-link">@(Model.MetaData.TotalPages - 1)</a></li>
-                             }
-                             if (Model.MetaData.TotalPages == Model.MetaData.CurrentPage)
-                             {
-                                     <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@Model.MetaData.TotalPages" class="page-link">@Model.MetaData.TotalPages</a></li>
-                             }
-                             else
-                             {
-                                     <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@Model.MetaData.TotalPages" class="page-link">@Model.MetaData.TotalPages</a></li>
-                             }
-                         }
-                         else
-                         {
-                             for (int _page = 1; _page <= Model.MetaData.TotalPages; _page++)
-                             {
+                            <ul class="pagination pagination-outline">
+                                @{
+                            if (@Model.Item1.MetaData.HasPrevious)
+                            {
+                                                <li class="page-item">
+                                                    <a asp-controller="places" asp-action="index" asp-route-page="@(Model.Item1.MetaData.CurrentPage-1)" class="page-link" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                            }
+                            else
+                            {
+                                                <li class="page-item disabled">
+                                                    <a href="#" class="page-link" aria-label="Previous">
+                                                        <span aria-hidden="true">«</span>
+                                                    </a>
+                                                </li>
+                            }
+                            if (Model.Item1.MetaData.TotalPages > 12)
+                            {
+                                if (Model.Item1.MetaData.CurrentPage == 1)
+                                {
+                                                    <li class="page-item"><a class="page-link" asp-controller="places" asp-action="Index" asp-route-page="1">1</a></li>
+                                }
+                                else
+                                {
+                                                    <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="1" >1</a></li>
+                                }
+                                if (Model.Item1.MetaData.CurrentPage == 2)
+                                {
+                                                    <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="2" class="page-link">2</a></li>
+                                }
+                                else
+                                {
+                                                    <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="2" class="page-link">2</a></li>
+                                }
+                                if (Model.Item1.MetaData.CurrentPage < 8)
+                                {
+                                    for (int _page = 3; _page <= 10; _page++)
+                                    {
 
-                                 if (_page == Model.MetaData.CurrentPage)
-                                 {
-                                         <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                 }
-                                 else
-                                 {
-                                         <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
-                                 }
-                             }
-                         }
-                         if (Model.MetaData.HasNext)
-                         {
-                                 <li class="page-item">
-                                     <a class="page-link" asp-controller="places" asp-action="index" asp-route-page="@(Model.MetaData.CurrentPage + 1)" aria-label="Next">
-                                         <span>&raquo;</span>
-                                     </a>
-                                 </li>
-                             }
-                         else
-                         {
-                                 <li class="page-item disabled" >
-                                     <a class="page-link" href="#" aria-label="Next">
-                                         <span>&raquo;</span>
-                                     </a>
-                                 </li>
-                         }
-                     }
-                 </ul>
-             }
-    }
+                                        if (_page == Model.Item1.MetaData.CurrentPage)
+                                        {
+                                                            <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                        else
+                                        {
+                                                            <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                    }
+                                                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                                }
+                                else if (Model.Item1.MetaData.CurrentPage >= 8 && Model.Item1.MetaData.CurrentPage < Model.Item1.MetaData.TotalPages - 7)
+                                {
+                                                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                                    for (int _page = Model.Item1.MetaData.CurrentPage - 3; _page <= Model.Item1.MetaData.CurrentPage + 3; _page++)
+                                    {
+                                        if (_page == Model.Item1.MetaData.CurrentPage)
+                                        {
+                                                            <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                        else
+                                        {
+                                                            <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                    }
+                                                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                                }
+                                else if (Model.Item1.MetaData.CurrentPage >= Model.Item1.MetaData.TotalPages - 7)
+                                {
+                                                    <li class="page-item disabled"><a class="page-link">...</a></li>
+                                    for (int _page = Model.Item1.MetaData.TotalPages - 9; _page <= Model.Item1.MetaData.TotalPages - 2; _page++)
+                                    {
+                                        if (_page == Model.Item1.MetaData.CurrentPage)
+                                        {
+                                                            <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                        else
+                                        {
+                                                            <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                        }
+                                    }
+                                }
+                                if (Model.Item1.MetaData.TotalPages - 1 == Model.Item1.MetaData.CurrentPage)
+                                {
+                                                    <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@(Model.Item1.MetaData.TotalPages - 1)" class="page-link">@(Model.Item1.MetaData.TotalPages - 1)</a></li>
+                                }
+                                else
+                                {
+                                                    <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@(Model.Item1.MetaData.TotalPages - 1)" class="page-link">@(Model.Item1.MetaData.TotalPages - 1)</a></li>
+                                }
+                                if (Model.Item1.MetaData.TotalPages == Model.Item1.MetaData.CurrentPage)
+                                {
+                                                    <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@Model.Item1.MetaData.TotalPages" class="page-link">@Model.Item1.MetaData.TotalPages</a></li>
+                                }
+                                else
+                                {
+                                                    <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@Model.Item1.MetaData.TotalPages" class="page-link">@Model.Item1.MetaData.TotalPages</a></li>
+                                }
+                            }
+                            else
+                            {
+                                for (int _page = 1; _page <= Model.Item1.MetaData.TotalPages; _page++)
+                                {
+
+                                    if (_page == Model.Item1.MetaData.CurrentPage)
+                                    {
+                                                        <li class="page-item active m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                    }
+                                    else
+                                    {
+                                                        <li class="page-item m-1"><a asp-controller="places" asp-action="Index" asp-route-page="@_page" class="page-link">@_page</a></li>
+                                    }
+                                }
+                            }
+                            if (Model.Item1.MetaData.HasNext)
+                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" asp-controller="places" asp-action="index" asp-route-page="@(Model.Item1.MetaData.CurrentPage + 1)" aria-label="Next">
+                                                        <span>&raquo;</span>
+                                                    </a>
+                                                </li>
+                            }
+                            else
+                            {
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span>&raquo;</span>
+                                                    </a>
+                                                </li>
+                            }
+                                }
+                            </ul>
+                        </nav>
+            }
+        }
     </div>
-    
-       
+
+
     <div class="text-center mb-5 mt-5">
         <h2 class="text-primary text-uppercase">TOP</h2>
     </div>
     <div class="row g-5">
         @{
-            foreach(var place in Model)
+            foreach (var place in Model.Item2)
             {
-                if (place.PlaceSiteUrl == "Концерт")
-                {   
+
+                if (place.Region == "Tashkent")
+                {
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="package-item bg-white mb-2">
                                     <a asp-controller="places" asp-action="get" asp-route-placeId="@place.Id">
@@ -241,7 +246,7 @@
                                                 <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>@place.Region</small>
                                                 <small class="m-0"><i class="fa fa-list-alt text-primary mr-2"></i>@place.PlaceSiteUrl</small>
                                             </div>
-                                                <a class="h5 text-decoration-none" href="">@place.Title</a>
+                                            <a class="h5 text-decoration-none" href="">@place.Title</a>
                                             <div class="border-top mt-4 pt-4">
                                                 <div class="d-flex justify-content-between">
                                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>@place.rank <small>(@place.rankedUsersCount)</small></h6>
@@ -255,7 +260,7 @@
                 }
             }
         }
-       
+
     </div>
-    
+
 </div>

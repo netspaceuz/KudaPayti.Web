@@ -1,6 +1,6 @@
 ﻿@using kudapoyti.Service.Common.Utils
 @using kudapoyti.Service.ViewModels
-@model Tuple<PlaceViewModel, PagedList<PlaceViewModel>>
+@model Tuple<PlaceViewModel, PagedList<PlaceViewModel>,PagedList<CommentsViewModel>>
 
 @{
     Layout = "_GetLayout.cshtml";
@@ -59,6 +59,69 @@
                         <span class="rating-counter"></span>
                     </div>
                 </div>
+                <div class="col-md-12 mt-4 mb-4 pt-2 pb-2 pe-4 px-4">
+                    <h3 class="title-5 text-center mt-3">Comment's</h3>
+                    <table class="table table-bordered multiselect">
+                        <thead class="text-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var admin in Model.Item3)
+                            {
+                                <tr class="tr-shadow text-dark">
+                                    <td class="name">@admin.UserName</td>
+                                    <td class="name">@admin.Comments</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @{
+                        if (@Model.Item3.MetaData.HasPrevious)
+                        {
+                            <div class="page-item">
+                                <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item3.MetaData.CurrentPage-1)" aria-label="Previous">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 15 15">
+                                        <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="page-item disabled">
+                                <a class="page-link" href="#" style="border-radius:15px;" aria-label="Previous">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 15 15">
+                                        <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        }
+                        if (Model.Item3.MetaData.HasNext)
+                        {
+                            <div class="page-item">
+                                <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item3.MetaData.CurrentPage + 1)" aria-label="Next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="page-item disabled">
+                                <a class="page-link" style="border-radius:15px;" href="#" aria-label="Next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+                
             </div>
 
             <ul class="cinema-content__recommend-list" style="flex-grow: 1; list-style: none; padding-top: 70px; padding-left: 0;">
@@ -67,14 +130,14 @@
                     {
                         if (type.Id != Model.Item1.Id)
                         {
-                                <a asp-controller="places" asp-action="get" asp-route-placeId="@type.Id">
-                                <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
-                                    <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
-                                    <div class="destination-overlay text-white text-decoration-none text-center" href="">
-                                        <h5 class="text-white">@type.Title</h5>
-                                    </div>
-                                </li>
-                                </a>
+                            <a asp-controller="places" asp-action="get" asp-route-placeId="@type.Id">
+                            <li class="list__item" style="display:flex; width: 100%; min-height: 220px; position: relative; border-radius: 10px; overflow: hidden;">
+                                <img src="/@type.ImageUrl" alt="img" style="display: inline-block; width: 100%; position: absolute; z-index: -1;">
+                                <div class="destination-overlay text-white text-decoration-none text-center" href="">
+                                    <h5 class="text-white">@type.Title</h5>
+                                </div>
+                            </li>
+                            </a>
                         }
                     }
                 }
@@ -102,23 +165,23 @@
                     }
                     if (Model.Item2.MetaData.HasNext)
                     {
-                            <li class="page-item">
-                                <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item2.MetaData.CurrentPage + 1)" aria-label="Next">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </a>
-                            </li>
+                        <li class="page-item">
+                            <a class="page-link" style="border-radius:15px;" asp-controller="places" asp-action="get" asp-route-page="@(Model.Item2.MetaData.CurrentPage + 1)" aria-label="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                    <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                </svg>
+                            </a>
+                        </li>
                     }
                     else
                     {
-                            <li class="page-item disabled">
-                                <a class="page-link" style="border-radius:15px;" href="#" aria-label="Next">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
-                                        <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
-                                    </svg>
-                                </a>
-                            </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" style="border-radius:15px;" href="#" aria-label="Next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="ceter" height="25" fill="currentColor" class="bi bi-caret-down text-center" viewBox="0 0 15 15">
+                                    <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                                </svg>
+                            </a>
+                        </li>
                     }
                 }
             </ul>

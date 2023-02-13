@@ -7,7 +7,7 @@ namespace kudapoyti.Service.Interfaces.CommentServices
     public interface ICommentService
     {
         public Task<bool> CreateAsync(CommentCreateDto createDto);
-        public Task<IEnumerable<CommentsViewModel>> GetByPlaceId(long id, PaginationParams @paginationParams);
+        public Task<PagedList<CommentsViewModel>> GetByPlaceId(long id, PaginationParams @params);
         public Task<bool> DeleteAsync(long id);
     }
 }

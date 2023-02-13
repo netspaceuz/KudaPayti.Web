@@ -8,7 +8,7 @@ namespace kudapoyti.Service.Dtos.CommentDtos
     public class CommentCreateDto
     {
         [Required]
-        [StringLength(50, MinimumLength = 1)]
+        [MaxLength(50), MinLength(1)]
         public string Comments { get; set; }=String.Empty;
 
         [Required]
@@ -24,7 +24,6 @@ namespace kudapoyti.Service.Dtos.CommentDtos
                 UserName=dto.UserName,
                 Comments = dto.Comments,
                 CreatedAt = TimeHelper.GetCurrentServerTime(),
-
             };
         }
     }

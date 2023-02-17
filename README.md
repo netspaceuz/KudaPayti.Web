@@ -21,7 +21,7 @@ Using the latest Microsoft technologies, KudaPoyti provides high performance, st
 
 KudaPoyti is the first website that is aimed to give info avout places in Uzbekistan to visit.
 
-Friendly members of the [KudoPoyti community](kudapoyti@gmail.com) will always help with advice and share their experiences. nopCommerce core development team provides professional support within 24 hours.
+Friendly members of the KudoPoyti community will always help with advice and share their experiences. KudaPoyti development team provides professional support within 24 hours.
 
 ### Admin Page ###
 After logging in admin page there is a list of admin list and their info. 
@@ -58,4 +58,4 @@ Selected Place | Comments
 
 ### Contribute ###
 
-As a free and open-source project, we are very grateful to everyone who helps us to develop KudaPoyti.
+As a free and open-source project, we are very grateful to everyone who helps us to develop KudaPoyti. Feel free to connect kudapoyti@gmail.com
